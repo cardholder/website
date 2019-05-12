@@ -1,14 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 import classes from './Layout.css';
 
 class Layout extends Component {
-
+    state = {
+        showSideDrawer: true
+    }
 
     render() {
         return (
             <div className={ classes.Layout }>
-                { this.props.children }
+                <SideDrawer open={ this.state.showSideDrawer } />
+                
+                <main>
+                    { this.props.children }
+                </main>
             </div>
         )
     }

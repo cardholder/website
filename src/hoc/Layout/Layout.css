@@ -11,9 +11,12 @@
     border-radius: 20px;
 }
 
-/* @media (min-width: 600px) {
+@media (max-width: 768px) {
     .Layout {
-        width: 500px;
-        left: calc(50% - 250px);
+        height: 100%;
+        top: 0%;
+        width: 100%;
+        left: 0%;
+        border-radius: 0;
     }
-} */
+}
