@@ -11,6 +11,15 @@
     border-radius: 20px;
 }
 
+@media (max-width: 1024px) {
+    .Layout {
+        height: 90%;
+        top: 5%;
+        width: 90%;
+        left: 5%;
+    }
+}
+
 @media (max-width: 768px) {
     .Layout {
         height: 100%;
