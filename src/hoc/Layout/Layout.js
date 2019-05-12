@@ -13,7 +13,7 @@ class Layout extends Component {
             <div className={ classes.Layout }>
                 <SideDrawer open={ this.state.showSideDrawer } />
                 
-                <main>
+                <main className={ classes.Content }>
                     { this.props.children }
                 </main>
             </div>
