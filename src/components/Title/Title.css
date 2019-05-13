@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+.Title {
+    text-align: center;
+    padding: 25px 5px
+}
+
+.Title h1 {
+    font-family: 'Lobster', cursive;
+    color: #fff;
+    font-size: 2rem
+}
