@@ -15,12 +15,28 @@
     justify-content: space-between;
 }
 
+.Icon {
+    position: fixed;
+    z-index: 600;
+    margin: 15px 15px;
+    color: #ffffff;
+    display: none
+}
+
+.Icon:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .SideDrawer {
         position: fixed;
         width: 340px !important;
         max-width: 70%;
         border-radius: 0;
+    }
+
+    .Icon {
+        display: block;
     }
 }
 

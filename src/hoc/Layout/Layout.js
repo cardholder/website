@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
 import classes from './Layout.css';
 
 class Layout extends Component {
@@ -8,11 +11,20 @@ class Layout extends Component {
         showSideDrawer: true
     }
 
+    sideDrawerHandler = (event) => {
+        this.setState(prev => {
+            return { showSideDrawer: !prev.showSideDrawer };
+        })
+    } 
+
     render() {
         return (
             <div className={ classes.Layout }>
                 <div>
-                    <SideDrawer open={ this.state.showSideDrawer } />
+                    <SideDrawer open={ this.state.showSideDrawer } closed={ this.sideDrawerHandler } />
+                </div>
+                <div className={ classes.Icon }>
+                    <FontAwesomeIcon onClick={ this.sideDrawerHandler } icon={ faBars } size="2x" />
                 </div>
                 
                 <main className={ classes.Content }>
