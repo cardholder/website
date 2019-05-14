@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
 .Title {
+    width: 100% !important;
     text-align: center;
-    padding: 25px 5px
+    padding: 25px 5px;
 }
 
 .Title h1 {

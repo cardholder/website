@@ -1,5 +1,6 @@
 .Layout {
     position: fixed;
+    display: flex;
     z-index: 500;
     background-color: white;
     width: 75%;
@@ -9,6 +10,10 @@
     top: 10%;
     box-sizing: border-box;
     border-radius: 20px;
+}
+
+.Layout div {
+    width: 33%;
 }
 
 @media (max-width: 1024px) {
@@ -27,5 +32,9 @@
         width: 100%;
         left: 0%;
         border-radius: 0;
+    }
+
+    .Layout div:first-of-type {
+        width: auto;
     }
 }

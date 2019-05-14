@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 
-import Title from '../../../components/Title/Title';
+import Title from '../../Title/Title';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import Footer from '../../Footer/Footer';
 
 import classes from './SideDrawer.css';
 
@@ -16,6 +18,9 @@ const sideDrawer = ( props ) => {
         <Fragment>
             <div className={ attachedClasses.join(' ') }>
                 <Title>cardholder</Title>
+                <NavigationItems />
+
+                <Footer />
             </div>
         </Fragment>
     );

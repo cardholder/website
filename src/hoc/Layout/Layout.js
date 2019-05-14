@@ -11,7 +11,9 @@ class Layout extends Component {
     render() {
         return (
             <div className={ classes.Layout }>
-                <SideDrawer open={ this.state.showSideDrawer } />
+                <div>
+                    <SideDrawer open={ this.state.showSideDrawer } />
+                </div>
                 
                 <main className={ classes.Content }>
                     { this.props.children }

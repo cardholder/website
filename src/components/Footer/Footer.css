@@ -1,0 +1,27 @@
+.Footer {
+    align-items: flex-end;
+    width: 100% !important;
+    justify-content: end;
+}
+
+.StoreLogos {
+    width: 100% !important;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.StoreLogos div {
+    width: 45% !important;
+}
+
+.Github {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.Github a,
+.Github a:hover {
+    color: #fff
+}
