@@ -1,0 +1,32 @@
+.Lobbylist {
+    display: flex;
+    justify-content: space-between
+}
+
+.LobbylistItems {
+    padding-left: 0;
+    padding-right: 0;  
+    max-width: 48%;
+}
+
+.LobbylistItems:nth-child(odd) {
+    margin-right: 7.5px; 
+}
+
+.LobbylistItems:nth-child(even) {
+    margin-left: 7.5px; 
+}
+
+@media (max-width: 575px) {
+    .LobbylistItems {
+        max-width: 100%;
+    }
+
+    .LobbylistItems:nth-child(odd) {
+        margin-right: 0; 
+    }
+    
+    .LobbylistItems:nth-child(even) {
+        margin-left: 0; 
+    }
+}

@@ -1,0 +1,47 @@
+.Lobbylist {
+    padding: 0
+}
+
+.Row {
+    margin-left: 0;    
+    margin-right: 0;
+}
+
+.Lobbylist Button {
+    background-color: #74c1b3;
+}
+
+.Lobbylist Button:hover {
+    background-color: #45736b;
+}
+
+.Header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between    
+}
+
+
+.Lobbylist .Searchbar {
+    width: 45%;
+}
+
+.LobbylistItems {
+    padding: 25px 0;
+    width: 100%;
+}
+
+@media (max-width: 425px) {
+    .Header {
+        flex-direction: column;
+    }
+
+    .Lobbylist Button {
+        margin-bottom: 15px; 
+        width: 100%;
+    }
+
+    .Lobbylist .Searchbar {
+        width: 100%;
+    }
+}
