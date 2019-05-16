@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router";
+
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 import classes from './Layout.css';
@@ -9,8 +11,8 @@ class Layout extends Component {
 
         let showSideDrawer = true;
         
-        if ( window.innerWidth <= 1024 ) {
-            showSideDrawer = true
+        if ( window.innerWidth <= 768 ) {
+            showSideDrawer = false
         }
 
         this.state = {
@@ -23,6 +25,14 @@ class Layout extends Component {
             return { showSideDrawer: !prev.showSideDrawer };
         })
     } 
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname !== this.props.location.pathname) {
+            this.setState({
+                showSideDrawer: false
+            });
+        }
+    }
 
     render() {
 
@@ -40,4 +50,4 @@ class Layout extends Component {
     }
 }
 
-export default Layout
+export default withRouter(Layout);
