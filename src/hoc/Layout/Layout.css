@@ -19,6 +19,7 @@
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
+    -webkit-overflow-scrolling: touch;
 }
 .Content::-webkit-scrollbar { /* WebKit */
     width: 0;
@@ -62,5 +63,11 @@
 
     .Icon {
         display: block;
+    }
+}
+
+@media (max-width: 425px) {
+    .Content {
+        padding: 45px 10px 10px 55px;
     }
 }
