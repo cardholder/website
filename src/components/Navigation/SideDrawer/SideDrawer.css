@@ -4,8 +4,8 @@
     left: 0;
     top: 0;
     z-index: 200;
-    background: rgb(118,197,181);
-    background: linear-gradient(135deg, rgba(118,197,181,1) 0%, rgba(83,98,145,1) 100%);
+    background: rgb(118, 197, 181);
+    background: linear-gradient(135deg, rgba(118, 197, 181, 1) 0%, rgba(83, 98, 145, 1) 100%);
     padding: 32px 16px;
     box-sizing: border-box;
     border-radius: 20px 0 0 20px;
@@ -17,10 +17,14 @@
 
 .Icon {
     position: fixed;
+    left: 98%;
+    top: 0;
     z-index: 600;
     margin: 15px 15px;
-    color: #ffffff;
-    display: none
+    color: #000;
+    transition: transform 0.3s ease-out;
+    width: 30px;
+    height: 40px;
 }
 
 .Icon:hover {
@@ -46,4 +50,65 @@
 
 .Close {
     transform: translateX(-100%);
+}
+
+.Icon.Close {
+    transform: translateX(0%);
+}
+
+.hamburger {
+    display: block;
+    position: absolute;
+}
+
+.hamburger__inner {
+    display: block;
+    width: 40px;
+    height: 6px;
+    margin-top: 12px;
+    background: #FFF;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.hamburger__inner::before,
+.hamburger__inner::after {
+    display: block;
+    position: absolute;
+    content: "";
+    z-index: -1;
+    width: 40px;
+    height: 6px;
+    background: #FFF;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.hamburger__inner::before {
+    top: 0;
+}
+
+.hamburger__inner::after {
+    top: 24px;
+}
+
+.hamburger--open .hamburger__inner {
+    background: none;
+}
+
+.hamburger--open .hamburger__inner::before,
+.hamburger--open .hamburger__inner::after {
+    top: 12px;
+}
+
+.hamburger--open .hamburger__inner::before {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.hamburger--open .hamburger__inner::after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
