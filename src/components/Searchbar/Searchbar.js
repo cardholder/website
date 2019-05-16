@@ -4,8 +4,8 @@ import { Input } from "reactstrap";
 import classes from "./Searchbar.css";
 
 const searchbar = () => (
-  <div className={ classes.Searchbar }>
-    <Input></Input>
+  <div className={classes.Searchbar}>
+    <Input />
   </div>
 );
 

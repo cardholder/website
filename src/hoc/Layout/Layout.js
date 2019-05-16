@@ -1,53 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { withRouter } from "react-router";
 
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
-import classes from './Layout.css';
+import classes from "./Layout.css";
 
 class Layout extends Component {
-    constructor ( props ) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        let showSideDrawer = true;
-        
-        if ( window.innerWidth <= 768 ) {
-            showSideDrawer = false
-        }
+    let showSideDrawer = true;
 
-        this.state = {
-            showSideDrawer: showSideDrawer
-        }
+    if (window.innerWidth <= 768) {
+      showSideDrawer = false;
     }
 
-    sideDrawerHandler = (event) => {
-        this.setState(prev => {
-            return { showSideDrawer: !prev.showSideDrawer };
-        })
-    } 
+    this.state = {
+      showSideDrawer: showSideDrawer
+    };
+  }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.location.pathname !== this.props.location.pathname && window.innerWidth <= 768) {
-            this.setState({
-                showSideDrawer: false
-            });
-        }
+  sideDrawerHandler = event => {
+    this.setState(prev => {
+      return { showSideDrawer: !prev.showSideDrawer };
+    });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.location.pathname !== this.props.location.pathname &&
+      window.innerWidth <= 768
+    ) {
+      this.setState({
+        showSideDrawer: false
+      });
     }
+  }
 
-    render() {
+  render() {
+    return (
+      <div className={classes.Layout}>
+        <div className={classes.SideDrawer}>
+          <SideDrawer
+            open={this.state.showSideDrawer}
+            closed={this.sideDrawerHandler}
+          />
+        </div>
 
-        return (
-            <div className={ classes.Layout }>
-                <div className={ classes.SideDrawer }>
-                    <SideDrawer open={ this.state.showSideDrawer } closed={ this.sideDrawerHandler } />
-                </div>
-                
-                <main className={ classes.Content }>
-                    { this.props.children }
-                </main>
-            </div>
-        )
-    }
+        <main className={classes.Content}>{this.props.children}</main>
+      </div>
+    );
+  }
 }
 
 export default withRouter(Layout);

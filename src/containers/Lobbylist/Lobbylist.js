@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Button, Row } from "reactstrap";
 import Searchbar from "../../components/Searchbar/Searchbar";
-import LobbylistItems from './LobbylistItems/LobbylistItems';
+import LobbylistItems from "./LobbylistItems/LobbylistItems";
 
 import classes from "./Lobbylist.css";
 
@@ -17,7 +17,7 @@ class Lobbylist extends Component {
             </div>
           </div>
 
-          <div className={ classes.LobbylistItems }>
+          <div className={classes.LobbylistItems}>
             <LobbylistItems />
           </div>
         </Row>

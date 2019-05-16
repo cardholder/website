@@ -6,7 +6,7 @@ import classes from "./LobbylistItems.css";
 
 const lobbylistItems = () => (
   <Container>
-    <Row className={ classes.Lobbylist }>
+    <Row className={classes.Lobbylist}>
       <div className={[classes.LobbylistItems, "col-sm-6"].join(" ")}>
         <LobbylistItem
           id={"dfjs3"}

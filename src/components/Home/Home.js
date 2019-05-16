@@ -4,10 +4,9 @@ import { Button } from "reactstrap";
 import classes from "./Home.css";
 
 class Home extends Component {
-
   continueToLobbylist = () => {
-    this.props.history.push('/lobby');
-  }
+    this.props.history.push("/lobby");
+  };
 
   render() {
     return (
@@ -36,7 +35,7 @@ class Home extends Component {
         </section>
 
         <section>
-          <Button onClick={ this.continueToLobbylist }>Lobby suchen</Button>
+          <Button onClick={this.continueToLobbylist}>Lobby suchen</Button>
         </section>
       </div>
     );

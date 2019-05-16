@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./LobbylistItem.css";
 
-import playButton from '../../../../assets/play-arrow.svg';
+import playButton from "../../../../assets/play-arrow.svg";
 
 const lobbylistItem = props => (
   <div className={classes.LobbylistItem}>
@@ -13,7 +13,7 @@ const lobbylistItem = props => (
       </p>
     </div>
     <div className={classes.Icon}>
-        <img src={playButton} alt="Join" />
+      <img src={playButton} alt="Join" />
     </div>
   </div>
 );

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-import classes from './StoreLogo.css';
+import classes from "./StoreLogo.css";
 
-const storeLogo = ( props ) => (
-    <div className={ classes.StoreLogo }>
-        <img alt={ props.alt } src={ props.path } height={ props.height } />
-    </div>
+const storeLogo = props => (
+  <div className={classes.StoreLogo}>
+    <img alt={props.alt} src={props.path} height={props.height} />
+  </div>
 );
 
 export default storeLogo;
