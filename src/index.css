@@ -13,10 +13,12 @@ code {
     monospace;
 }
 
-html {
-  background-color: #f1ede9;
-}
-
 h1 {
   font-family: 'Lobster', cursive;
+}
+
+button {
+  padding: 5px 25px !important;
+  font-weight: lighter !important;
+  border: 0 !important;
 }

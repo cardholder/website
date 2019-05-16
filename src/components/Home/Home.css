@@ -15,9 +15,11 @@
 }
 
 .Home Button {
-    padding: 5px 25px;
-    font-weight: lighter;
     background-color: #536291;
+}
+
+.Home Button:hover {
+    background-color: #313a57;
 }
 
 .Home h1 {
