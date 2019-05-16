@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 
 import Title from "../../Title/Title";
+import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
 import NavigationItems from "../NavigationItems/NavigationItems";
 import Footer from "../../Footer/Footer";
 import { HamburgerButton } from 'react-hamburger-button';
+
 
 import classes from "./SideDrawer.css";
 
@@ -16,7 +18,9 @@ const sideDrawer = props => {
   return (
     <Fragment>
       <div className={[classes.SideDrawer, attachedClasses].join(" ")}>
-        <Title>cardholder</Title>
+        <Title>
+          <NavigationItem to="/" exact>cardholder</NavigationItem>
+        </Title>
         <NavigationItems />
 
         <Footer />

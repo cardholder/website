@@ -27,7 +27,7 @@ class Layout extends Component {
     } 
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location.pathname !== this.props.location.pathname) {
+        if (nextProps.location.pathname !== this.props.location.pathname && window.innerWidth <= 768) {
             this.setState({
                 showSideDrawer: false
             });
