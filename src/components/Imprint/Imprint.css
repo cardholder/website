@@ -1,0 +1,12 @@
+.Imprint h1 {
+    padding-bottom: 10px;
+}
+
+.Imprint p {
+    font-weight: lighter;
+    color: #707070;
+}
+
+.Imprint p strong {
+    font-weight: bold;
+}

@@ -19,7 +19,7 @@ const footer = () => (
             <StoreLogo alt="Apple Store Placeholder" path={ aStoreLogo } height="40px" />
             <StoreLogo alt="Google Store Placeholder" path={ gStoreLogo } height="40px" />
         </div>
-        <NavigationItem to="/impressum" exact>Impressum</NavigationItem>
+        <NavigationItem to="/imprint" exact>Impressum</NavigationItem>
     </div>
 );
 

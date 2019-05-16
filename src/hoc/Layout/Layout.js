@@ -11,6 +11,14 @@ class Layout extends Component {
         showSideDrawer: true
     }
 
+    componentDidMount = () => {
+        if ( window.innerWidth <= 1024 ) {
+            this.setState({
+                showSideDrawer: false
+            });
+        }
+    }
+
     sideDrawerHandler = (event) => {
         this.setState(prev => {
             return { showSideDrawer: !prev.showSideDrawer };
@@ -20,7 +28,7 @@ class Layout extends Component {
     render() {
         return (
             <div className={ classes.Layout }>
-                <div>
+                <div className={ classes.SideDrawer }>
                     <SideDrawer open={ this.state.showSideDrawer } closed={ this.sideDrawerHandler } />
                 </div>
                 <div className={ classes.Icon }>
