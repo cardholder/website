@@ -10,3 +10,7 @@
 .Imprint p strong {
     font-weight: bold;
 }
+
+.Icon p {
+    margin-bottom: 0; 
+}
