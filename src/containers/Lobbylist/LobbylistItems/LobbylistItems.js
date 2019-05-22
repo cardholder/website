@@ -1,55 +1,59 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Container, Row } from "reactstrap";
-import posed from 'react-pose';
+import posed from "react-pose";
 import LobbylistItem from "./LobbylistItem/LobbylistItem";
 
 import classes from "./LobbylistItems.css";
 
-const lobbylistItems = () => {
-  const Box = posed.div({
-    hoverable: true,
-    pressable: true,
-    init: {
-      scale: 1
-    },
-    hover: {
-      scale: 1.05
-    },
-    press: {
-      scale: 1.025
+class lobbylistItems extends Component {
+  render() {
+    const Box = posed.div({
+      hoverable: true,
+      pressable: true,
+      init: {
+        scale: 1
+      },
+      hover: {
+        scale: 1.025
+      },
+      press: {
+        scale: 1.025
+      },
+    });
+
+    let lobbies = null;
+    if (this.props.lobbies) {
+      lobbies = this.props.lobbies.map(lobby => (
+        <Box
+          key={lobby.id}
+          className={[classes.LobbylistItems, "col-sm-6"].join(" ")}
+        >
+          <LobbylistItem
+            id={lobby.id}
+            game={lobby.game}
+            maxPlayers={lobby.max_players}
+            actualPlayers={lobby.players.length}
+          />
+        </Box>
+      ));
     }
-  });
 
-  return (
-    <Container>
-      <Row className={classes.Lobbylist}>
-        <Box className={[classes.LobbylistItems, "col-sm-6"].join(" ")}>
-          <LobbylistItem
-            id={"dfjs3"}
-            game={"Mau-Mau"}
-            maxPlayers={4}
-            actualPlayers={2}
-          />
-        </Box>
-        <Box className={[classes.LobbylistItems, "col-sm-6"].join(" ")}>
-          <LobbylistItem
-            id={"dfjs3"}
-            game={"Mau-Mau"}
-            maxPlayers={4}
-            actualPlayers={2}
-          />
-        </Box>
-        <Box className={[classes.LobbylistItems, "col-sm-6"].join(" ")}>
-          <LobbylistItem
-            id={"dfjs3"}
-            game={"Mau-Mau"}
-            maxPlayers={4}
-            actualPlayers={2}
-          />
-        </Box>
-      </Row>
-    </Container>
-  );
-};
+    return (
+      <Container>
+        <Row className={classes.Lobbylist}>{lobbies}</Row>
+      </Container>
+    );
+  }
+}
 
-export default lobbylistItems;
+const mapStateToProps = state => ({
+  lobbies: state.lobbylist.lobbies,
+  url: state.lobbylist.url,
+  websocket: state.lobbylist.websocket
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(lobbylistItems);
