@@ -21,6 +21,12 @@
     justify-content: space-between    
 }
 
+.Error {
+    margin-top: 45px;
+    width: 100%;
+    text-align: center
+}
+
 
 .Lobbylist .Searchbar {
     width: 45%;
