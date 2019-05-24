@@ -1,0 +1,13 @@
+.LobbyCreate {
+    font-weight: 100;
+}
+
+.LobbyCreate h1 {
+    text-align: left;
+    padding: 0;
+    color: #000;
+}
+
+.LobbyCreate > div {
+    padding: 25px 0
+}
