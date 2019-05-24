@@ -5,6 +5,8 @@ import Layout from "./hoc/Layout/Layout";
 import Home from "./components/Home/Home";
 import Lobbylist from "./containers/Lobbylist/Lobbylist";
 import Imprint from "./components/Imprint/Imprint";
+import LobbyCreate from './containers/Lobby/LobbyCreate/LobbyCreate';
+import Lobby from './containers/Lobby/Lobby';
 
 import "./App.css";
 
@@ -13,8 +15,10 @@ function App() {
     <Fragment>
       <Layout>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/lobby" component={Lobbylist} />
+          <Route path="/" component={Home} exact />
+          <Route path="/lobby" component={Lobbylist} exact />
+          <Route path="/lobby/create" component={LobbyCreate} exact/>
+          <Route path="/lobby/:id" component={Lobby} />
           <Route path="/imprint" component={Imprint} />
         </Switch>
       </Layout>
