@@ -33,7 +33,6 @@ class Lobbylist extends Component {
             <Link to="/lobby/create">
               <Button className="sm">Lobby erstellen</Button>
             </Link>
-            <Button onClick={() => { this.props.sendMessage("Hello") }} className="sm">X</Button>
             <div className={classes.Searchbar}>
               <Searchbar />
             </div>
