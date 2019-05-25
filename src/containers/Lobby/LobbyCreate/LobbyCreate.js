@@ -59,11 +59,10 @@ class LobbyCreate extends Component {
   send = () => {
     if (this.state.players.isValid) {
       const settings = {
-        game: this.state.selectedGame.label,
+        game: this.state.selectedGame.value,
         visibility: this.state.selectedVisibility.value,
         max_players: this.state.players.value
       };
-      console.log(settings);
       this.props.sendSettings(settings);
     }
   };
@@ -146,7 +145,7 @@ class LobbyCreate extends Component {
 }
 
 const mapStateToProps = state => ({
-  lobbies: state.lobby.lobby,
+  lobby: state.lobby.data,
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error

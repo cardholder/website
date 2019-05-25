@@ -2,14 +2,13 @@ import * as actionTypes from "../actions/actionTypes";
 import * as ws from "./socket";
 
 const initialState = {
-  lobby: null,
+  data: null,
   websocket: null,
   connected: false,
   error: false
 };
 
 const onCreated = (state, action) => {
-  console.log(action);
   return state;
 };
 

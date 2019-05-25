@@ -5,7 +5,7 @@ export const create = (url) => {
     return dispatch => {
         websocket.onopen = () => dispatch({ type: actionTypes.LOBBY_OPEN, websocket: websocket });
         websocket.onclose = (event) => dispatch({ type: actionTypes.LOBBY_CLOSE });
-        websocket.onmessage = (event) => dispatch({ type: actionTypes.LOBBY_MESSAGE, lobbies: event.data });
+        websocket.onmessage = (event) => dispatch({ type: actionTypes.LOBBY_MESSAGE, data: event.data });
         websocket.onerror = (event) => dispatch({ type: actionTypes.LOBBY_BROKEN })
     }
 }

@@ -39,9 +39,13 @@ class Lobbylist extends Component {
                 Es konnte keine Verbindung zum Server aufgebaut werden!
               </Alert>
             </div>
-          ) : (
+          ) : this.props.lobbies != null && this.props.lobbies.length >= 1 ? (
             <div className={classes.LobbylistItems}>
               <LobbylistItems />
+            </div>
+          ) : (
+            <div className={classes.Error}>
+              <Alert color="danger">Keine Server vorhanden!</Alert>
             </div>
           )}
         </Row>
@@ -51,7 +55,7 @@ class Lobbylist extends Component {
 }
 
 const mapStateToProps = state => ({
-  lobbies: state.lobbylist.lobbies,
+  lobbies: state.lobbylist.data,
   websocket: state.lobbylist.websocket,
   connected: state.lobbylist.connected,
   error: state.lobbylist.error

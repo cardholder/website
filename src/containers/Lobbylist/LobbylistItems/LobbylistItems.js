@@ -48,7 +48,7 @@ class lobbylistItems extends Component {
 }
 
 const mapStateToProps = state => ({
-  lobbies: state.lobbylist.lobbies,
+  lobbies: state.lobbylist.data,
   url: state.lobbylist.url,
   websocket: state.lobbylist.websocket
 });

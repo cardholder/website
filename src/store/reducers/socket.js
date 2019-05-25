@@ -9,11 +9,7 @@ export const onOpen = (state, action) => {
 };
 
 export const onClose = (state, aciton) => {
-  return updateObject(state, { conntected: false, lobbies: null });
-};
-
-export const setLobbies = (state, action) => {
-  return updateObject(state, { lobbies: JSON.parse(action.lobbies).lobbies });
+  return updateObject(state, { conntected: false, data: null });
 };
 
 export const onDisconnect = (state, action) => {

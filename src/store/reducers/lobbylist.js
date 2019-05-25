@@ -1,17 +1,22 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as ws from "./socket";
+import { updateObject } from "../utility";
 
 const initialState = {
-  lobbies: null,
+  data: null,
   websocket: null,
-  conntected: false,
+  connected: false,
   error: false
+};
+
+export const setLobbies = (state, action) => {
+  return updateObject(state, { data: JSON.parse(action.data).lobbies });
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.MESSAGE_LOBBYLIST:
-      return ws.setLobbies(state, action);
+      return setLobbies(state, action);
     case actionTypes.OPEN_LOBBYLIST:
       return ws.onOpen(state, action);
     case actionTypes.CLOSED_LOBBYLIST:
