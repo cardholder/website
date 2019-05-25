@@ -84,6 +84,12 @@ class LobbyCreate extends Component {
     this.props.disconnect();
   }
 
+  componentDidUpdate() {
+    if (this.props.id) {
+      this.props.history.push("/lobby/" + this.props.id);
+    } 
+  }
+
   render() {
     const inputClasses = [classes.Input];
 
@@ -145,7 +151,7 @@ class LobbyCreate extends Component {
 }
 
 const mapStateToProps = state => ({
-  lobby: state.lobby.data,
+  id: state.lobby.id,
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error

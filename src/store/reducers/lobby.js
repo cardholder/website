@@ -1,15 +1,17 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as ws from "./socket";
+import { updateObject } from "../utility";
 
 const initialState = {
   data: null,
+  id: null,
   websocket: null,
   connected: false,
   error: false
 };
 
 const onCreated = (state, action) => {
-  return state;
+  return updateObject({ id: JSON.parse(action.data).id });
 };
 
 const reducer = (state = initialState, action) => {
