@@ -6,19 +6,19 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import thunk from 'redux-thunk';
-
+import thunk from "redux-thunk";
 
 import generalReducer from "./store/reducers/general";
 import lobbylistReducer from "./store/reducers/lobbylist";
+import lobbyReducer from "./store/reducers/lobby";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   general: generalReducer,
-  lobbylist: lobbylistReducer
+  lobbylist: lobbylistReducer,
+  lobby: lobbyReducer
 });
-
 
 const store = createStore(
   rootReducer,

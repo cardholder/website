@@ -2,25 +2,28 @@ import * as actionTypes from "../actions/actionTypes";
 import * as ws from "./socket";
 
 const initialState = {
-  lobbies: null,
+  lobby: null,
   websocket: null,
-  conntected: false,
+  connected: false,
   error: false
+};
+
+const onCreated = (state, action) => {
+  console.log(action);
+  return state;
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.MESSAGE_LOBBYLIST:
-      return ws.setLobbies(state, action);
-    case actionTypes.OPEN_LOBBYLIST:
+    case actionTypes.LOBBY_OPEN:
       return ws.onOpen(state, action);
-    case actionTypes.CLOSED_LOBBYLIST:
+    case actionTypes.LOBBY_MESSAGE:
+      return onCreated(state, action);
+    case actionTypes.LOBBY_CLOSE:
       return ws.onClose(state, action);
-    case actionTypes.DISCONNECT_LOBBYLIST:
-      return ws.onDisconnect(state, action);
-    case actionTypes.BROKEN_LOBBYLIST:
+    case actionTypes.LOBBY_BROKEN:
       return ws.onError(state, action);
-    case actionTypes.SEND_LOBBYLIST:
+    case actionTypes.LOBBY_SEND:
       return ws.onSendMessage(state, action);
     default:
       return state;

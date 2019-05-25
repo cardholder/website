@@ -1,4 +1,5 @@
 const BROKEN = "BROKEN";
+const CREATE = "CREATE";
 const CLOSED = "CLOSED";
 const CONNECT = "CONNECT";
 const DISCONNECT = "DISCONNECT";
@@ -16,3 +17,12 @@ export const BROKEN_LOBBYLIST = LOBBYLIST_PREFIX + "::" + BROKEN;
 export const CLOSED_LOBBYLIST = LOBBYLIST_PREFIX + "::" + CLOSED;
 export const OPEN_LOBBYLIST = LOBBYLIST_PREFIX + "::" + OPEN;
 export const SEND_LOBBYLIST = LOBBYLIST_PREFIX + "::" + SEND;
+
+export const LOBBY_PREFIX = "LOBBY";
+export const LOBBY_CREATE = LOBBY_PREFIX + "::" + CREATE;
+export const LOBBY_MESSAGE = LOBBY_PREFIX + "::" + MESSAGE;
+export const LOBBY_BROKEN = LOBBY_PREFIX + "::" + BROKEN;
+export const LOBBY_OPEN = LOBBY_PREFIX + "::" + OPEN;
+export const LOBBY_SEND = LOBBY_PREFIX + "::" + SEND;
+export const LOBBY_DISCONNECT = LOBBY_PREFIX + "::" + DISCONNECT;
+export const LOBBY_CLOSE = LOBBY_PREFIX + "::" + CLOSED;

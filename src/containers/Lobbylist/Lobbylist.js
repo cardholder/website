@@ -7,11 +7,7 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import LobbylistItems from "./LobbylistItems/LobbylistItems";
 import { Link } from "react-router-dom";
 
-import {
-  connect as connectLobbylist,
-  disconnect,
-  sendMessage
-} from "../../store/actions/lobbylist";
+import * as actions from "../../store/actions/index";
 import * as config from "../../config";
 
 import classes from "./Lobbylist.css";
@@ -56,16 +52,15 @@ class Lobbylist extends Component {
 
 const mapStateToProps = state => ({
   lobbies: state.lobbylist.lobbies,
-  url: state.lobbylist.url,
   websocket: state.lobbylist.websocket,
   connected: state.lobbylist.connected,
   error: state.lobbylist.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  connect: () => dispatch(connectLobbylist(config.SOCKET_API + "lobbylist/")),
-  disconnect: () => dispatch(disconnect()),
-  sendMessage: (message) => dispatch(sendMessage(message))
+  connect: () => dispatch(actions.connect(config.SOCKET_API + "lobbylist/")),
+  disconnect: () => dispatch(actions.disconnect()),
+  sendMessage: message => dispatch(actions.sendMessage(message))
 });
 
 export default connect(

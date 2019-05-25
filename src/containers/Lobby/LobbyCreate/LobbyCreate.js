@@ -3,7 +3,12 @@ import Label from "../../../components/UI/Label/Label";
 import Select from "../../../components/UI/Select/Select";
 import { Input, Button } from "reactstrap";
 
+import { connect } from "react-redux";
+
 import classes from "./LobbyCreate.css";
+
+import * as actions from "../../../store/actions/index";
+import * as config from "../../../config";
 
 class LobbyCreate extends Component {
   state = {
@@ -49,9 +54,23 @@ class LobbyCreate extends Component {
 
   abort = () => {
     this.props.history.push("/lobby");
-  }
+  };
+
+  send = () => {
+    if (this.state.players.isValid) {
+      const settings = {
+        game: this.state.selectedGame.label,
+        visibility: this.state.selectedVisibility.value,
+        max_players: this.state.players.value
+      };
+      console.log(settings);
+      this.props.sendSettings(settings);
+    }
+  };
 
   componentDidMount() {
+    this.props.connect();
+
     if (this.state.selectedGame === null || this.selectedVisibility === null) {
       this.setState(prevState => {
         return {
@@ -62,14 +81,16 @@ class LobbyCreate extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.disconnect();
+  }
+
   render() {
     const inputClasses = [classes.Input];
 
     if (!this.state.players.isValid && this.state.players.touched) {
       inputClasses.push(classes.Error);
     }
-
-    console.log(inputClasses.join(" "));
 
     return (
       <div className={classes.LobbyCreate}>
@@ -110,11 +131,34 @@ class LobbyCreate extends Component {
         </section>
         <section>
           <Button onClick={this.abort}>Abbrechen</Button>
-          <Button>Lobby erstellen</Button>
+          <Button
+            onClick={this.send}
+            disabled={
+              !this.state.players.isValid || this.state.players.isTouched || !this.props.connected
+            }
+          >
+            Lobby erstellen
+          </Button>
         </section>
       </div>
     );
   }
 }
 
-export default LobbyCreate;
+const mapStateToProps = state => ({
+  lobbies: state.lobby.lobby,
+  websocket: state.lobby.websocket,
+  connected: state.lobby.connected,
+  error: state.lobby.error
+});
+
+const mapDispatchToProps = dispatch => ({
+  connect: () => dispatch(actions.create(config.SOCKET_API + "create/")),
+  disconnect: () => dispatch(actions.lobbyCreateDisconnect()),
+  sendSettings: settings => dispatch(actions.sendSettings(settings))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LobbyCreate);
