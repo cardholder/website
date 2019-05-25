@@ -1,5 +1,18 @@
 .LobbyCreate {
+    height: 100%;
     font-weight: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.LobbyCreate section {
+    margin: 0;
+}
+
+.LobbyCreate section:last-of-type {
+    margin: 15px 0;
+    margin-top: auto;
+    width: auto;
 }
 
 .LobbyCreate h1 {
@@ -8,6 +21,65 @@
     color: #000;
 }
 
-.LobbyCreate > div {
-    padding: 25px 0
+.LobbyCreate > section:first-of-type > div {
+    padding: 25px 0;
+    max-width: 390px;
+}
+
+.LobbyCreate > section:first-of-type  > div > div {
+    padding-bottom: 25px;
+}
+
+.LobbyCreate > section:first-of-type  > div > div .Input {
+    border-color: transparent;
+    font-weight: 100;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.LobbyCreate > section:first-of-type  > div > div .Input:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.LobbyCreate > section:first-of-type  > div > div > div span {
+    background-color: transparent;
+}
+
+.LobbyCreate > section:last-of-type button {
+    min-width: 165px;
+    background-color: #536291;
+    margin-right: 15px;
+}
+
+.LobbyCreate > section:last-of-type button:hover {
+    background-color: #313a57;
+}
+
+.LobbyCreate > section:last-of-type button:first-of-type {
+    min-width: 165px;
+    background-color: #b94f74;
+    margin-right: 15px;
+}
+
+.LobbyCreate > section:last-of-type button:first-of-type:hover {
+    background-color: #813751;
+}
+
+.LobbyCreate > section:last-of-type button:first-of-type {
+    margin-right: 15px;
+}
+
+.Error {
+    border-color: #b94f74 !important;
+}
+
+@media (max-width: 470px) {
+    .LobbyCreate > section:last-of-type button {
+        margin-right: 0;
+        display: block;
+        width: 100%;
+    }
+
+    .LobbyCreate > section:last-of-type button:first-of-type {
+        margin-bottom: 10px; 
+    }
 }
