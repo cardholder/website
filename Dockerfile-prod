@@ -11,8 +11,9 @@ RUN npm run build
 # production environment
 FROM fholzer/nginx-brotli:v1.16.0
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
+COPY --from=build /app/build /usr/share/nginx/html
 
 ADD nginx.conf /etc/nginx/
-ADD symfony.conf /etc/nginx/conf.d/
-ADD gzip.conf /etc/nginx/conf.d/
-ADD brotli.conf /etc/nginx/conf.d/
+#ADD symfony.conf /etc/nginx/conf.d/
+#ADD gzip.conf /etc/nginx/conf.d/
+#ADD brotli.conf /etc/nginx/conf.d/
