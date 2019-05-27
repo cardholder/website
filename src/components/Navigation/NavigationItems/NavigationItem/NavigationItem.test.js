@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 configure({ adapter: new Adapter() });
 
-describe("<Footer />", () => {
+describe("<NavigationItem />", () => {
   let wrapper;
 
   beforeEach(() => {
