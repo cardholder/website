@@ -9,7 +9,7 @@ export const onOpen = (state, action) => {
 };
 
 export const onClose = (state, aciton) => {
-  return updateObject(state, { conntected: false, data: null });
+  return updateObject(state, { conntected: false });
 };
 
 export const onDisconnect = (state, action) => {
