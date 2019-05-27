@@ -10,7 +10,7 @@ import classes from "./LobbyCreate.css";
 import * as actions from "../../../store/actions/index";
 import * as config from "../../../config";
 
-class LobbyCreate extends Component {
+export class LobbyCreate extends Component {
   state = {
     games: [
       { value: "maumau", label: "Mau Mau" },
