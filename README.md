@@ -7,7 +7,7 @@ Dies ist das Repository für die Web Anwendung von Cardholder, mit React.js. Die
 > [Gitmoji](https://gitmoji.carloscuesta.me/) wird für das visuelle Verständnis der Commits verwendet.
 
 ## Demo
-Eine aktuelle Demo kann [hier](cardholder.surge.sh) gefunden werden.
+Eine aktuelle Demo kann [hier](http://cardholder.surge.sh) gefunden werden.
 
 ## Benutzung
 Coming soon...
