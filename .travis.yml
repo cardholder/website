@@ -6,6 +6,10 @@ cache:
     - node_modules
 script:
   - npm test
-  # - npm run build
+  - npm run build
+deploy:
+  provider: surge
+  domain: cardholder.surge.sh
+  project: ./build/
 on:
   branch: master
