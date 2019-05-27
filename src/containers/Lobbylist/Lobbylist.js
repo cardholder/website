@@ -12,7 +12,7 @@ import * as config from "../../config";
 
 import classes from "./Lobbylist.css";
 
-class Lobbylist extends Component {
+export class Lobbylist extends Component {
   componentDidMount() {
     this.props.connect();
   }
