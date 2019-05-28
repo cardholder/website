@@ -31,7 +31,7 @@ describe("<Lobbylist />", () => {
   it("should render a error when no lobbies exist", () => {
     wrapper.setProps({ lobbies: null });
     expect(
-      wrapper.contains(<Alert color="danger">Keine Server vorhanden!</Alert>)
+      wrapper.contains(<Alert color="danger">Keine Lobbies vorhanden!</Alert>)
     ).toEqual(true);
   });
 
