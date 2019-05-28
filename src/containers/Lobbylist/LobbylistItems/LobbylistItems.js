@@ -6,7 +6,7 @@ import LobbylistItem from "./LobbylistItem/LobbylistItem";
 
 import classes from "./LobbylistItems.css";
 
-class lobbylistItems extends Component {
+export class LobbylistItems extends Component {
   render() {
     const Box = posed.div({
       hoverable: true,
@@ -56,4 +56,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(lobbylistItems);
+)(LobbylistItems);
