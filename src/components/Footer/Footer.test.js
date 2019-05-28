@@ -5,7 +5,6 @@ import Adapter from "enzyme-adapter-react-16";
 
 import Footer from "../Footer/Footer";
 import NavigationItem from "../Navigation/NavigationItems/NavigationItem/NavigationItem";
-import StoreLogo from "../StoreLogo/StoreLogo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -20,10 +19,6 @@ describe("<Footer />", () => {
 
   it("should render an imprint <NavigationItem />", () => {
     expect(wrapper.find(NavigationItem)).toHaveLength(1);
-  });
-
-  it("should render two <StoreLogo />", () => {
-    expect(wrapper.find(StoreLogo)).toHaveLength(2);
   });
 
   it("should render a github reference", () => {
