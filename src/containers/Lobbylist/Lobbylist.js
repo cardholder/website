@@ -45,7 +45,7 @@ export class Lobbylist extends Component {
             </div>
           ) : (
             <div className={classes.Error}>
-              <Alert color="danger">Keine Server vorhanden!</Alert>
+              <Alert color="danger">Keine Lobbies vorhanden!</Alert>
             </div>
           )}
         </Row>
