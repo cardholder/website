@@ -20,7 +20,8 @@ const select = (props) => {
     control: (provided, state) => ({
       ...provided,
       boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
-      border: "0px"
+      border: "0px",
+      borderRadius: "10px"
     }),
     menu: (provided, state) => ({
       ...provided,
