@@ -6,7 +6,8 @@ import Adapter from "enzyme-adapter-react-16";
 import { LobbyCreate } from "./LobbyCreate";
 import Label from "../../../components/UI/Label/Label";
 import Select from "../../../components/UI/Select/Select";
-import { Input, Button } from "reactstrap";
+import { Button } from "reactstrap";
+import Input from "../../../components/UI/Input/Input";
 
 configure({ adapter: new Adapter() });
 
@@ -49,7 +50,7 @@ describe("<LobbyCreate />", () => {
         maximum: 8,
         minimum: 2,
         isValid: true,
-        touched: true
+        isTouched: true
       }
     });
     wrapper.setProps({

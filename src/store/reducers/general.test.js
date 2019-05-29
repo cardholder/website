@@ -4,7 +4,7 @@ import * as actionTypes from "../actions/actionTypes";
 describe("general reducer", () => {
   it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual({
-      username: null
+      username: ""
     });
   });
 
