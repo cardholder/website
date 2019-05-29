@@ -48,3 +48,11 @@
         left: calc(50% - 250px);
     }
 }
+
+@media (max-width: 600px) {
+    .Modal > section button {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px
+    } 
+}
