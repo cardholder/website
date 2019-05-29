@@ -12,6 +12,7 @@ const input = props => {
   return (
     <Input
       className={inputClasses.join(" ")}
+      type="text"
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}
