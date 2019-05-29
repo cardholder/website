@@ -15,6 +15,11 @@ const input = props => {
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}
+      onKeyPress={event => {
+        if (event.key === "Enter" && props.onEnter !== undefined) {
+          props.onEnter();
+        }
+      }}
     />
   );
 };

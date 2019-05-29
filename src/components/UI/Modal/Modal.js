@@ -16,11 +16,11 @@ class Modal extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      nextProps.username !== this.props.username || 
+      nextProps.username !== this.props.username ||
       nextState.username !== this.state.username
     );
   }
-  
+
   abort = () => {
     this.props.history.push("/");
   };
@@ -40,7 +40,10 @@ class Modal extends Component {
         <div
           className={classes.Modal}
           style={{
-            transform: this.props.username === "" ? "translateY(0)" : "translateY(-100vh)",
+            transform:
+              this.props.username === ""
+                ? "translateY(0)"
+                : "translateY(-100vh)",
             opacity: this.props.username === "" ? "1" : "0"
           }}
         >
@@ -49,6 +52,7 @@ class Modal extends Component {
             placeholder={"Username eingeben"}
             value={this.state.username}
             onChange={this.onChangeUsername}
+            onEnter={this.setUsername}
           />
           <section>
             <Button onClick={this.abort}>Abbrechen</Button>
