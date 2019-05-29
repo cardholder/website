@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Label from "../../../components/UI/Label/Label";
 import Select from "../../../components/UI/Select/Select";
 import { Button } from "reactstrap";
 import Input from "../../../components/UI/Input/Input";
+import Modal from "../../../components/UI/Modal/Modal";
 
 import { connect } from "react-redux";
 
@@ -88,60 +89,65 @@ export class LobbyCreate extends Component {
   componentDidUpdate() {
     if (this.props.id) {
       this.props.history.push("/lobby/" + this.props.id);
-    } 
+    }
   }
 
   render() {
     return (
-      <div className={classes.LobbyCreate}>
-        <section>
-          <h1>Lobby erstellen</h1>
-          <div>
+      <Fragment>
+        <Modal />
+        <div className={classes.LobbyCreate}>
+          <section>
+            <h1>Lobby erstellen</h1>
             <div>
-              <Label>Kartenspiel:</Label>
-              <Select
-                selected={this.state.selectedGame}
-                onChange={this.onGameChange}
-                options={this.state.games}
-              />
+              <div>
+                <Label>Kartenspiel:</Label>
+                <Select
+                  selected={this.state.selectedGame}
+                  onChange={this.onGameChange}
+                  options={this.state.games}
+                />
+              </div>
+              <div>
+                <Label>Spieleranzahl:</Label>
+                <Input
+                  isValid={this.state.players.isValid}
+                  isTouched={this.state.players.isTouched}
+                  placeholder={
+                    this.state.players.minimum +
+                    " - " +
+                    this.state.players.maximum +
+                    " Spieler"
+                  }
+                  value={this.state.players.value}
+                  onChange={this.onPlayersChange}
+                />
+              </div>
+              <div>
+                <Label>Lobbyart:</Label>
+                <Select
+                  selected={this.state.selectedVisibility}
+                  onChange={this.onVisibilitiesChange}
+                  options={this.state.visibilities}
+                />
+              </div>
             </div>
-            <div>
-              <Label>Spieleranzahl:</Label>
-              <Input
-                isValid={this.state.players.isValid}
-                isTouched={this.state.players.isTouched}
-                placeholder={
-                  this.state.players.minimum +
-                  " - " +
-                  this.state.players.maximum +
-                  " Spieler"
-                }
-                value={this.state.players.value}
-                onChange={this.onPlayersChange}
-              />
-            </div>
-            <div>
-              <Label>Lobbyart:</Label>
-              <Select
-                selected={this.state.selectedVisibility}
-                onChange={this.onVisibilitiesChange}
-                options={this.state.visibilities}
-              />
-            </div>
-          </div>
-        </section>
-        <section>
-          <Button onClick={this.abort}>Abbrechen</Button>
-          <Button
-            onClick={this.send}
-            disabled={
-              !this.state.players.isValid || !this.state.players.isTouched || !this.props.connected
-            }
-          >
-            Lobby erstellen
-          </Button>
-        </section>
-      </div>
+          </section>
+          <section>
+            <Button onClick={this.abort}>Abbrechen</Button>
+            <Button
+              onClick={this.send}
+              disabled={
+                !this.state.players.isValid ||
+                !this.state.players.isTouched ||
+                !this.props.connected
+              }
+            >
+              Lobby erstellen
+            </Button>
+          </section>
+        </div>
+      </Fragment>
     );
   }
 }

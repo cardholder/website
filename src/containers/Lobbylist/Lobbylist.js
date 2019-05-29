@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 
@@ -6,6 +6,7 @@ import { Container, Button, Row, Alert } from "reactstrap";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import LobbylistItems from "./LobbylistItems/LobbylistItems";
 import { Link } from "react-router-dom";
+import Modal from "../../components/UI/Modal/Modal";
 
 import * as actions from "../../store/actions/index";
 import * as config from "../../config";
@@ -23,33 +24,36 @@ export class Lobbylist extends Component {
 
   render() {
     return (
-      <Container className={classes.Lobbylist}>
-        <Row className={classes.Row}>
-          <div className={classes.Header}>
-            <Link to="/lobby/create">
-              <Button className="sm">Lobby erstellen</Button>
-            </Link>
-            <div className={classes.Searchbar}>
-              <Searchbar />
+      <Fragment>
+        <Modal />
+        <Container className={classes.Lobbylist}>
+          <Row className={classes.Row}>
+            <div className={classes.Header}>
+              <Link to="/lobby/create">
+                <Button className="sm">Lobby erstellen</Button>
+              </Link>
+              <div className={classes.Searchbar}>
+                <Searchbar />
+              </div>
             </div>
-          </div>
-          {this.props.error ? (
-            <div className={classes.Error}>
-              <Alert color="danger">
-                Es konnte keine Verbindung zum Server aufgebaut werden!
-              </Alert>
-            </div>
-          ) : this.props.lobbies != null && this.props.lobbies.length >= 1 ? (
-            <div className={classes.LobbylistItems}>
-              <LobbylistItems />
-            </div>
-          ) : (
-            <div className={classes.Error}>
-              <Alert color="danger">Keine Lobbies vorhanden!</Alert>
-            </div>
-          )}
-        </Row>
-      </Container>
+            {this.props.error ? (
+              <div className={classes.Error}>
+                <Alert color="danger">
+                  Es konnte keine Verbindung zum Server aufgebaut werden!
+                </Alert>
+              </div>
+            ) : this.props.lobbies != null && this.props.lobbies.length >= 1 ? (
+              <div className={classes.LobbylistItems}>
+                <LobbylistItems />
+              </div>
+            ) : (
+              <div className={classes.Error}>
+                <Alert color="danger">Keine Lobbies vorhanden!</Alert>
+              </div>
+            )}
+          </Row>
+        </Container>
+      </Fragment>
     );
   }
 }

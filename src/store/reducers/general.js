@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  username: null
+  username: ""
 };
 
 const setUsername = (state, action) => {
