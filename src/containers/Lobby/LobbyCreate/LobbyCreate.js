@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Label from "../../../components/UI/Label/Label";
 import Select from "../../../components/UI/Select/Select";
-import { Input, Button } from "reactstrap";
+import { Button } from "reactstrap";
+import Input from "../../../components/UI/Input/Input";
 
 import { connect } from "react-redux";
 
@@ -27,7 +28,7 @@ export class LobbyCreate extends Component {
       maximum: 8,
       minimum: 2,
       isValid: false,
-      touched: false
+      isTouched: false
     }
   };
 
@@ -41,7 +42,7 @@ export class LobbyCreate extends Component {
 
   onPlayersChange = event => {
     let players = this.state.players;
-    players.touched = true;
+    players.isTouched = true;
     players.isValid = false;
     players.value = event.target.value;
 
@@ -91,12 +92,6 @@ export class LobbyCreate extends Component {
   }
 
   render() {
-    const inputClasses = [classes.Input];
-
-    if (!this.state.players.isValid && this.state.players.touched) {
-      inputClasses.push(classes.Error);
-    }
-
     return (
       <div className={classes.LobbyCreate}>
         <section>
@@ -113,7 +108,8 @@ export class LobbyCreate extends Component {
             <div>
               <Label>Spieleranzahl:</Label>
               <Input
-                className={inputClasses.join(" ")}
+                isValid={this.state.players.isValid}
+                isTouched={this.state.players.isTouched}
                 placeholder={
                   this.state.players.minimum +
                   " - " +
@@ -139,7 +135,7 @@ export class LobbyCreate extends Component {
           <Button
             onClick={this.send}
             disabled={
-              !this.state.players.isValid || this.state.players.isTouched || !this.props.connected
+              !this.state.players.isValid || !this.state.players.isTouched || !this.props.connected
             }
           >
             Lobby erstellen
