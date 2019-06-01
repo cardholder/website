@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { Button } from "reactstrap";
+import { Button, Input as In } from "reactstrap";
 import Input from "../Input/Input";
 
 import * as actions from "../../../store/actions/index";
@@ -10,9 +10,20 @@ import classes from "./Modal.css";
 import Backdrop from "../Backdrop/Backdrop";
 
 class Modal extends Component {
-  state = {
-    username: ""
-  };
+  constructor(props) {
+    super(props);
+
+    let username = localStorage.getItem('username');
+    if(username) {
+      props.setUsername(username);
+    }
+
+    this.state = {
+      username: username,
+      remember: false
+    };
+  }
+  
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
@@ -25,7 +36,16 @@ class Modal extends Component {
     this.props.history.push("/");
   };
 
+  onChangeRemember = event => {
+    this.setState(prevState => {
+      return { remember: !prevState.remember };
+    });
+  };
+
   setUsername = () => {
+    if (this.state.remember) {
+      localStorage.setItem('username', this.state.username);
+    }
     this.props.setUsername(this.state.username);
   };
 
@@ -54,6 +74,15 @@ class Modal extends Component {
             onChange={this.onChangeUsername}
             onEnter={this.setUsername}
           />
+          <section>
+            <In
+              className={classes.Input}
+              type="checkbox"
+              value={this.state.remember}
+              onChange={this.onChangeRemember}
+            />
+            <p>Merken</p>
+          </section>
           <section>
             <Button onClick={this.abort}>Abbrechen</Button>
             <Button

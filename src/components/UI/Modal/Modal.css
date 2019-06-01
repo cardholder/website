@@ -42,6 +42,15 @@
     background-color: #813751;
 }
 
+.Input {
+    margin-left: 0px;
+    margin-top: .25rem;
+}
+
+.Modal p {
+    margin-left: 20px;
+}
+
 @media (min-width: 600px) {
     .Modal {
         width: 500px;
