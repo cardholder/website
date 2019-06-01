@@ -14,6 +14,13 @@ const onCreated = (state, action) => {
   return updateObject({ id: JSON.parse(action.data).id });
 };
 
+export const onDisconnect = (state, action) => {
+  if (state.websocket) {
+    state.websocket.close();
+  }
+  return updateObject(state, { conntected: false, data: null, id: null });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOBBY_OPEN:
@@ -22,6 +29,8 @@ const reducer = (state = initialState, action) => {
       return onCreated(state, action);
     case actionTypes.LOBBY_CLOSE:
       return ws.onClose(state, action);
+    case actionTypes.LOBBY_DISCONNECT:
+      return onDisconnect(state, action);
     case actionTypes.LOBBY_BROKEN:
       return ws.onError(state, action);
     case actionTypes.LOBBY_SEND:

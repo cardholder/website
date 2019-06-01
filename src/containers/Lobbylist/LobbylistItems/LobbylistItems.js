@@ -23,7 +23,7 @@ export class LobbylistItems extends Component {
     });
 
     let lobbies = null;
-    if (this.props.lobbies) {
+    if (this.props.lobbies && this.props.lobbies.length > 0) {
       lobbies = this.props.lobbies.map(lobby => (
         <Box
           key={lobby.id}

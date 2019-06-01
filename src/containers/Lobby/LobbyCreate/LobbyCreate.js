@@ -86,6 +86,7 @@ export class LobbyCreate extends Component {
     this.props.disconnect();
   }
 
+
   componentDidUpdate() {
     if (this.props.id) {
       this.props.history.push("/lobby/" + this.props.id);
@@ -161,7 +162,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   connect: () => dispatch(actions.create(config.SOCKET_API + "create/")),
-  disconnect: () => dispatch(actions.lobbyCreateDisconnect()),
+  disconnect: () => dispatch(actions.lobbyDisconnect()),
   sendSettings: settings => dispatch(actions.sendSettings(settings))
 });
 

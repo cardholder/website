@@ -10,7 +10,7 @@ export const create = (url) => {
     }
 }
 
-export const lobbyCreateDisconnect = () => {
+export const lobbyDisconnect = () => {
     return {
         type: actionTypes.LOBBY_DISCONNECT
     }
