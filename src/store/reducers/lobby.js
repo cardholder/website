@@ -11,14 +11,15 @@ const initialState = {
 };
 
 const onCreated = (state, action) => {
-  return updateObject({ id: JSON.parse(action.data).id });
+  return updateObject(state, { id: JSON.parse(action.data).id });
 };
 
 export const onDisconnect = (state, action) => {
+  console.log(state);
   if (state.websocket) {
     state.websocket.close();
   }
-  return updateObject(state, { conntected: false, data: null, id: null });
+  return updateObject(state, { conntected: false, data: null, id: null, websocket: null });
 };
 
 const reducer = (state = initialState, action) => {

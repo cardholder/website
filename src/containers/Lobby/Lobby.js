@@ -6,6 +6,10 @@ import * as actions from "../../store/actions/index";
 import * as config from "../../config";
 
 class Lobby extends Component {
+  state = {
+    sent: false
+  }
+
   componentDidMount() {
     this.props.connect(this.props.match.params.id);
   }
@@ -15,8 +19,11 @@ class Lobby extends Component {
   }
 
   render() {
-    if (this.props.username && this.props.connected) {
+    if (this.props.username && this.props.connected && !this.state.sent) {
       this.props.sendMessage({ name: this.props.username });
+      this.setState({
+        sent: true
+      });
     }
     return <h1>{this.props.match.params.id}</h1>;
   }
@@ -24,6 +31,7 @@ class Lobby extends Component {
 
 const mapStateToProps = state => ({
   id: state.lobby.id,
+  lobby: state.lobby.data,
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error,
