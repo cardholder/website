@@ -13,7 +13,8 @@ const initialState = {
 };
 
 const onCreated = (state, action) => {
-  return updateObject(state, { id: JSON.parse(action.data).id });
+  console.log(action);
+  return state;
 };
 
 export const onDisconnect = (state, action) => {

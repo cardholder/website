@@ -14,20 +14,24 @@ class Lobby extends Component {
     this.props.connect(this.props.match.params.id);
   }
 
+  componentDidUpdate() {
+    if (
+      this.props.username &&
+      this.props.connected &&
+      !this.state.sent
+    ) {
+      this.props.sendMessage({ name: this.props.username });
+      this.setState({
+        sent: true
+      })
+    }
+  }
+
   componentWillUnmount() {
     this.props.disconnect();
   }
 
   render() {
-    let regex = new RegExp("lobby/[\\w]+/", "i");
-    if (
-      this.props.username &&
-      this.props.connected &&
-      this.props.websocket != null &&
-      regex.test(this.props.websocket.url)
-    ) {
-      this.props.sendMessage({ name: this.props.username });
-    }
     return <h1>{this.props.match.params.id}</h1>;
   }
 }
@@ -38,8 +42,7 @@ const mapStateToProps = state => ({
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error,
-  username: state.general.username,
-  status: state.lobby.status
+  username: state.general.username
 });
 
 const mapDispatchToProps = dispatch => ({
