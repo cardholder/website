@@ -7,7 +7,9 @@ const initialState = {
   id: null,
   websocket: null,
   connected: false,
-  error: false
+  error: false,
+  status: "",
+  sent: false
 };
 
 const onCreated = (state, action) => {
@@ -15,11 +17,15 @@ const onCreated = (state, action) => {
 };
 
 export const onDisconnect = (state, action) => {
-  console.log(state);
   if (state.websocket) {
     state.websocket.close();
   }
-  return updateObject(state, { conntected: false, data: null, id: null, websocket: null });
+  return updateObject(state, {
+    conntected: false,
+    data: null,
+    id: null,
+    websocket: null
+  });
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,7 +41,11 @@ const reducer = (state = initialState, action) => {
     case actionTypes.LOBBY_BROKEN:
       return ws.onError(state, action);
     case actionTypes.LOBBY_SEND:
-      return ws.onSendMessage(state, action);
+      let tempState = state;
+      if (action.message.name) {
+        tempState = updateObject(tempState, { sent: true });
+      }
+      return ws.onSendMessage(tempState, action);
     default:
       return state;
   }

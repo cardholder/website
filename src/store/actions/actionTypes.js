@@ -7,7 +7,7 @@ const MESSAGE = "MESSAGE";
 const OPEN = "OPEN";
 const SEND = "SEND";
 
-export const SET_USERNAME = "SET_USERNAME";
+export const SET_USERNAME = "GENERAL::USERNAME";
 
 export const LOBBYLIST_PREFIX = "LOBBYLIST";
 export const CONNECT_LOBBYLIST = LOBBYLIST_PREFIX + "::" + CONNECT;

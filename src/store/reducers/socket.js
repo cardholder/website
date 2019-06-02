@@ -4,7 +4,8 @@ export const onOpen = (state, action) => {
   return updateObject(state, {
     websocket: action.websocket,
     connected: true,
-    error: false
+    error: false,
+    status: action.status
   });
 };
 

@@ -1,9 +1,9 @@
 import * as actionTypes from "./actionTypes";
 
-export const create = (url) => {
+export const create = (url, status) => {
     const websocket = new WebSocket(url);
     return dispatch => {
-        websocket.onopen = () => dispatch({ type: actionTypes.LOBBY_OPEN, websocket: websocket });
+        websocket.onopen = () => dispatch({ type: actionTypes.LOBBY_OPEN, websocket: websocket, status: status });
         websocket.onclose = (event) => dispatch({ type: actionTypes.LOBBY_CLOSE });
         websocket.onmessage = (event) => dispatch({ type: actionTypes.LOBBY_MESSAGE, data: event.data });
         websocket.onerror = (event) => dispatch({ type: actionTypes.LOBBY_BROKEN })
