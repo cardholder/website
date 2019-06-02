@@ -19,7 +19,15 @@ class Lobby extends Component {
   }
 
   render() {
-    if (this.props.username && this.props.connected && !this.props.sent && this.props.status === "lobby") {
+    let regex = new RegExp("lobby/[\\w]+/", "i");
+    if (
+      this.props.username &&
+      this.props.connected &&
+      !this.props.sent &&
+      this.props.status === "lobby" &&
+      this.props.websocket != null &&
+      regex.test(this.props.websocket.url)
+    ) {
       this.props.sendMessage({ name: this.props.username });
     }
     return <h1>{this.props.match.params.id}</h1>;

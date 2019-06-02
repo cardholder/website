@@ -42,10 +42,14 @@ const reducer = (state = initialState, action) => {
       return ws.onError(state, action);
     case actionTypes.LOBBY_SEND:
       let tempState = state;
-      if (action.message.name) {
-        tempState = updateObject(tempState, { sent: true });
+      if (!state.sent) {
+        console.log(action.message)
+        if (action.message.name) {
+          tempState = updateObject(tempState, { sent: true });
+        }
+        return ws.onSendMessage(tempState, action);
       }
-      return ws.onSendMessage(tempState, action);
+      return tempState;
     default:
       return state;
   }
