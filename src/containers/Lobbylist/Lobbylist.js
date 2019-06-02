@@ -8,7 +8,7 @@ import LobbylistItems from "./LobbylistItems/LobbylistItems";
 import { Link } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
 
-import * as actions from "../../store/actions/index";
+import * as actions from "../../store/actions/lobbylist";
 import * as config from "../../config";
 
 import classes from "./Lobbylist.css";

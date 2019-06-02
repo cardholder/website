@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
 import classes from "./LobbyCreate.css";
 
-import * as actions from "../../../store/actions/index";
+import * as createActions from "../../../store/actions/create";
 import * as config from "../../../config";
 
 export class LobbyCreate extends Component {
@@ -155,16 +155,16 @@ export class LobbyCreate extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.lobby.id,
-  websocket: state.lobby.websocket,
-  connected: state.lobby.connected,
-  error: state.lobby.error
+  id: state.create.id,
+  websocket: state.create.websocket,
+  connected: state.create.connected,
+  error: state.create.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  connect: () => dispatch(actions.create(config.SOCKET_API + "create/", "create")),
-  disconnect: () => dispatch(actions.lobbyDisconnect()),
-  sendSettings: settings => dispatch(actions.sendSettings(settings))
+  connect: () => dispatch(createActions.connect(config.SOCKET_API + "create/", "create")),
+  disconnect: () => dispatch(createActions.lobbyDisconnect()),
+  sendSettings: settings => dispatch(createActions.sendSettings(settings))
 });
 
 export default connect(

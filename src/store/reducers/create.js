@@ -30,17 +30,17 @@ export const onDisconnect = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOBBY_OPEN:
+    case actionTypes.CREATE_OPEN:
       return ws.onOpen(state, action);
-    case actionTypes.LOBBY_MESSAGE:
+    case actionTypes.CREATE_MESSAGE:
       return onCreated(state, action);
-    case actionTypes.LOBBY_CLOSE:
+    case actionTypes.CREATE_CLOSE:
       return ws.onClose(state, action);
-    case actionTypes.LOBBY_DISCONNECT:
+    case actionTypes.CREATE_DISCONNECT:
       return onDisconnect(state, action);
-    case actionTypes.LOBBY_BROKEN:
+    case actionTypes.CREATE_BROKEN:
       return ws.onError(state, action);
-    case actionTypes.LOBBY_SEND:
+    case actionTypes.CREATE_SEND:
       return ws.onSendMessage(state, action);
     default:
       return state;

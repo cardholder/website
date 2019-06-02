@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import * as actions from "../../store/actions/index";
+import * as lobbyActions from "../../store/actions/lobby"
 import * as config from "../../config";
 
 class Lobby extends Component {
@@ -23,8 +23,6 @@ class Lobby extends Component {
     if (
       this.props.username &&
       this.props.connected &&
-      !this.props.sent &&
-      this.props.status === "lobby" &&
       this.props.websocket != null &&
       regex.test(this.props.websocket.url)
     ) {
@@ -46,9 +44,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   connect: id =>
-    dispatch(actions.create(config.SOCKET_API + "lobby/" + id + "/", "lobby")),
-  disconnect: () => dispatch(actions.lobbyDisconnect()),
-  sendMessage: settings => dispatch(actions.sendSettings(settings))
+    dispatch(lobbyActions.connect(config.SOCKET_API + "lobby/" + id + "/")),
+  disconnect: () => dispatch(lobbyActions.lobbyDisconnect()),
+  sendMessage: message => dispatch(lobbyActions.sendMessage(message))
 });
 
 export default connect(

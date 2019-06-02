@@ -11,13 +11,15 @@ import thunk from "redux-thunk";
 import generalReducer from "./store/reducers/general";
 import lobbylistReducer from "./store/reducers/lobbylist";
 import lobbyReducer from "./store/reducers/lobby";
+import createReducer from "./store/reducers/create";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   general: generalReducer,
   lobbylist: lobbylistReducer,
-  lobby: lobbyReducer
+  lobby: lobbyReducer,
+  create: createReducer
 });
 
 const store = createStore(

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Button, Input as In } from "reactstrap";
 import Input from "../Input/Input";
 
-import * as actions from "../../../store/actions/index";
+import * as actions from "../../../store/actions/general";
 import classes from "./Modal.css";
 import Backdrop from "../Backdrop/Backdrop";
 
