@@ -9,32 +9,41 @@ const initialState = {
   error: false
 };
 
-const addLobby = (state, lobby) => {
+const sortLobby = (state) => {
   let lobbies = [...state.data];
-  lobbies.push(lobby);
-  return updateObject(state, { data: lobbies })
+  lobbies.sort((a, b) => {
+    return a.players.length - b.players.length;
+  });
+
+  return updateObject(state, { data: lobbies});
 }
 
 const removeLobby = (state, lobby_id) => {
   let lobbies = [...state.data];
-  lobbies = lobbies.filter(item => item.id !== lobby_id)
+  lobbies = lobbies.filter(lobby => lobby.id !== lobby_id);
   return updateObject(state, { data: lobbies });
-}
+};
+
+const updateLobby = (state, lobby) => {
+  let lobbies = [...state.data];
+  removeLobby(state, lobby.id);
+  lobbies.push(lobby);
+  return updateObject(state, { data: lobbies });
+};
 
 export const setLobbies = (state, action) => {
   let modifiedState = state;
-  console.log(action);
   let data = JSON.parse(action.data);
-  console.log(data);
+
   if (data.lobbies) {
     modifiedState = updateObject(modifiedState, { data: data.lobbies });
   } else if (data.lobby) {
-    modifiedState = addLobby(modifiedState, data.lobby);
+    modifiedState = updateLobby(modifiedState, data.lobby);
   } else if (data.lobby_id) {
     modifiedState = removeLobby(modifiedState, data.lobby_id);
   }
 
-  return modifiedState;
+  return sortLobby(modifiedState);
 };
 
 const reducer = (state = initialState, action) => {
