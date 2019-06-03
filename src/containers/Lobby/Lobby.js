@@ -1,29 +1,35 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 
-import * as lobbyActions from "../../store/actions/lobby"
+import Modal from "../../components/UI/Modal/Modal";
+import * as lobbyActions from "../../store/actions/lobby";
 import * as config from "../../config";
 
 class Lobby extends Component {
   state = {
-    sent: false
+    sent: false,
+    connected: true
   };
 
   componentDidMount() {
     this.props.connect(this.props.match.params.id);
+    if (!this.state.connected) {
+      this.setState({ connected: true });
+    }
   }
 
   componentDidUpdate() {
     if (
       this.props.username &&
       this.props.connected &&
+      this.state.connected &&
       !this.state.sent
     ) {
       this.props.sendMessage({ name: this.props.username });
       this.setState({
         sent: true
-      })
+      });
     }
   }
 
@@ -32,7 +38,12 @@ class Lobby extends Component {
   }
 
   render() {
-    return <h1>{this.props.match.params.id}</h1>;
+    return (
+      <Fragment>
+        <Modal />
+        <h1>{this.props.match.params.id}</h1>
+      </Fragment>
+    );
   }
 }
 

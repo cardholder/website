@@ -7,13 +7,10 @@ const initialState = {
   id: null,
   websocket: null,
   connected: false,
-  error: false,
-  status: "",
-  sent: false
+  error: false
 };
 
 const onCreated = (state, action) => {
-  console.log(action);
   return state;
 };
 

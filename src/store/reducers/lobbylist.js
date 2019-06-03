@@ -25,8 +25,8 @@ const removeLobby = (state, lobby_id) => {
 };
 
 const updateLobby = (state, lobby) => {
-  let lobbies = [...state.data];
-  removeLobby(state, lobby.id);
+  let data = removeLobby(state, lobby.id);
+  let lobbies = [...data.data];
   lobbies.push(lobby);
   return updateObject(state, { data: lobbies });
 };
@@ -34,6 +34,7 @@ const updateLobby = (state, lobby) => {
 export const setLobbies = (state, action) => {
   let modifiedState = state;
   let data = JSON.parse(action.data);
+  console.log(data);
 
   if (data.lobbies) {
     modifiedState = updateObject(modifiedState, { data: data.lobbies });

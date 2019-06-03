@@ -26,7 +26,7 @@ export class LobbyCreate extends Component {
     selectedVisibility: null,
     players: {
       value: "",
-      maximum: 8,
+      maximum: 6,
       minimum: 2,
       isValid: false,
       isTouched: false
