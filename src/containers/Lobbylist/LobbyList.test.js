@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -6,6 +6,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { Lobbylist } from "./Lobbylist";
 
 import { Alert } from "reactstrap";
+import Emoji from "../../components/UI/Emoji/Emoji";
 import LobbylistItems from "./LobbylistItems/LobbylistItems";
 
 configure({ adapter: new Adapter() });
@@ -31,7 +32,9 @@ describe("<Lobbylist />", () => {
   it("should render a error when no lobbies exist", () => {
     wrapper.setProps({ lobbies: null });
     expect(
-      wrapper.contains(<Alert color="danger">Keine Lobbies vorhanden!</Alert>)
+      wrapper.contains(
+        <div>Es existiert noch keine Lobby.</div>
+      )
     ).toEqual(true);
   });
 
@@ -68,8 +71,6 @@ describe("<Lobbylist />", () => {
         }
       ]
     });
-    expect(
-      wrapper.find(LobbylistItems)
-    ).toHaveLength(1);
+    expect(wrapper.find(LobbylistItems)).toHaveLength(1);
   });
 });
