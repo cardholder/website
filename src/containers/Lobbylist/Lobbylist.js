@@ -33,9 +33,11 @@ export class Lobbylist extends Component {
               <Link to="/lobby/create">
                 <Button className="sm">Lobby erstellen</Button>
               </Link>
-              <div className={classes.Searchbar}>
-                <Searchbar />
-              </div>
+              {false ? (
+                <div className={classes.Searchbar}>
+                  <Searchbar />
+                </div>
+              ) : null}
             </div>
             {this.props.error ? (
               <div className={classes.Error}>
