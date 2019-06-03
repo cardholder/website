@@ -7,6 +7,7 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import LobbylistItems from "./LobbylistItems/LobbylistItems";
 import { Link } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
+import Emoji from "../../components/UI/Emoji/Emoji";
 
 import * as actions from "../../store/actions/lobbylist";
 import * as config from "../../config";
@@ -48,7 +49,11 @@ export class Lobbylist extends Component {
               </div>
             ) : (
               <div className={classes.Error}>
-                <Alert color="danger">Keine Lobbies vorhanden!</Alert>
+                <Emoji />
+
+                <div className={classes.Sadly}>
+                  Es existiert noch keine Lobby.
+                </div>
               </div>
             )}
           </Row>

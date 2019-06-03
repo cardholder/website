@@ -10,8 +10,12 @@ const initialState = {
   error: false
 };
 
-const onCreated = (state, action) => {
-  return state;
+const onMessage = (state, action) => {
+  let data = JSON.parse(action.data);
+  return updateObject(state, {
+    id: data.id,
+    data: data.players
+  });
 };
 
 export const onDisconnect = (state, action) => {
@@ -31,7 +35,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.LOBBY_OPEN:
       return ws.onOpen(state, action);
     case actionTypes.LOBBY_MESSAGE:
-      return onCreated(state, action);
+      return onMessage(state, action);
     case actionTypes.LOBBY_CLOSE:
       return ws.onClose(state, action);
     case actionTypes.LOBBY_DISCONNECT:

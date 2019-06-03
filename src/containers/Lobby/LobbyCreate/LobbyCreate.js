@@ -15,8 +15,8 @@ import * as config from "../../../config";
 export class LobbyCreate extends Component {
   state = {
     games: [
-      { value: "maumau", label: "Mau Mau" },
-      { value: "cardsagainsthumanity", label: "Cards Against Humanity" }
+      { value: "Mau Mau", label: "Mau Mau" },
+      { value: "Cards Against Humanity", label: "Cards Against Humanity" }
     ],
     selectedGame: null,
     visibilities: [

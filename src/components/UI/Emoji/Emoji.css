@@ -1,0 +1,11 @@
+.Emoji {
+    padding: 40px 0 65px 0;
+}
+
+.Emoji svg {
+    -webkit-transform: scale(1.85);
+    -moz-transform: scale(1.85);
+    -ms-transform: scale(1.85);
+    -o-transform: scale(1.85);
+    transform: scale(1.85);
+}

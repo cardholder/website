@@ -5,7 +5,7 @@ import classes from "./LobbylistItem.css";
 import playButton from "../../../../assets/play-arrow.svg";
 
 const lobbylistItem = props => (
-  <div className={classes.LobbylistItem}>
+  <div onClick={() => props.onClick(props.id)} className={classes.LobbylistItem}>
     <div>
       <p>{props.game}</p>
       <p>

@@ -9,14 +9,15 @@ const initialState = {
   error: false
 };
 
-const sortLobby = (state) => {
+const sortLobby = state => {
   let lobbies = [...state.data];
+
   lobbies.sort((a, b) => {
-    return a.players.length - b.players.length;
+    return b.players.length - a.players.length;
   });
 
-  return updateObject(state, { data: lobbies});
-}
+  return updateObject(state, { data: lobbies });
+};
 
 const removeLobby = (state, lobby_id) => {
   let lobbies = [...state.data];
@@ -34,7 +35,6 @@ const updateLobby = (state, lobby) => {
 export const setLobbies = (state, action) => {
   let modifiedState = state;
   let data = JSON.parse(action.data);
-  console.log(data);
 
   if (data.lobbies) {
     modifiedState = updateObject(modifiedState, { data: data.lobbies });
