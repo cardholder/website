@@ -39,7 +39,7 @@ export class Lobbylist extends Component {
                 </div>
               ) : null}
             </div>
-            {this.props.error ? (
+            {this.props.error || !this.props.connected ? (
               <div className={classes.Error}>
                 <Alert color="danger">
                   Es konnte keine Verbindung zum Server aufgebaut werden!

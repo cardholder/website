@@ -18,8 +18,8 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/lobby" component={Lobbylist} exact />
           <Route path="/lobby/create" component={LobbyCreate} exact/>
-          <Route path="/lobby/:id" component={Lobby} />
-          <Route path="/imprint" component={Imprint} />
+          <Route path="/imprint" component={Imprint} exact/>
+          <Route path="/:id" component={Lobby} />
         </Switch>
       </Layout>
     </Fragment>

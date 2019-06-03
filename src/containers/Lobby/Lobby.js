@@ -41,7 +41,8 @@ class Lobby extends Component {
     return (
       <Fragment>
         <Modal />
-        <h1>{this.props.match.params.id}</h1>
+        <h1>Lobby</h1>
+        { this.props.match.params.id }
       </Fragment>
     );
   }

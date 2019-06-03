@@ -9,7 +9,7 @@ import classes from "./LobbylistItems.css";
 
 export class LobbylistItems extends Component {
   onClickHanlder = id => {
-    this.props.history.push("/lobby/" + id)
+    this.props.history.push("/" + id)
   }
 
   render() {
