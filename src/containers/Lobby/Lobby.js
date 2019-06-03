@@ -6,7 +6,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import * as lobbyActions from "../../store/actions/lobby";
 import * as config from "../../config";
 import copyImg from "../../assets/copy.svg";
-import copy from 'copy-to-clipboard';
+import copy from "copy-to-clipboard";
 
 import classes from "./Lobby.css";
 
@@ -56,7 +56,13 @@ class Lobby extends Component {
             <h2 ref={copyRef => (this.copyRef = copyRef)}>
               {window.location.origin + "/" + this.props.match.params.id}
             </h2>
-            <img onClick={() => copy(window.location.origin + "/" + this.props.match.params.id)} src={copyImg} alt="copy" />
+            <img
+              onClick={() =>
+                copy(window.location.origin + "/" + this.props.match.params.id)
+              }
+              src={copyImg}
+              alt="copy"
+            />
           </section>
         </div>
       </Fragment>

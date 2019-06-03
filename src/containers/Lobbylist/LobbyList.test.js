@@ -16,6 +16,7 @@ describe("<Lobbylist />", () => {
 
   beforeEach(() => {
     wrapper = shallow(<Lobbylist connect={() => {}} disconnect={() => {}} />);
+    wrapper.setProps({ connected: true });
   });
 
   it("should render a error when no connection", () => {
@@ -31,11 +32,9 @@ describe("<Lobbylist />", () => {
 
   it("should render a error when no lobbies exist", () => {
     wrapper.setProps({ lobbies: null });
-    expect(
-      wrapper.contains(
-        <div>Es existiert noch keine Lobby.</div>
-      )
-    ).toEqual(true);
+    expect(wrapper.contains(<div>Es existiert noch keine Lobby.</div>)).toEqual(
+      true
+    );
   });
 
   it("should render <LobbylistItems />", () => {
@@ -44,7 +43,7 @@ describe("<Lobbylist />", () => {
         {
           id: "hAsfh8n",
           game: "Durak",
-          visibility: "private",
+          visibility: "public",
           max_players: 8,
           players: [
             {
