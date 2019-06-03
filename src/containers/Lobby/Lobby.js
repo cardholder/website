@@ -5,12 +5,18 @@ import { connect } from "react-redux";
 import Modal from "../../components/UI/Modal/Modal";
 import * as lobbyActions from "../../store/actions/lobby";
 import * as config from "../../config";
+import copyImg from "../../assets/copy.svg";
+import copy from 'copy-to-clipboard';
+
+import classes from "./Lobby.css";
 
 class Lobby extends Component {
   state = {
     sent: false,
     connected: true
   };
+
+  copyRef = null;
 
   componentDidMount() {
     this.props.connect(this.props.match.params.id);
@@ -41,8 +47,18 @@ class Lobby extends Component {
     return (
       <Fragment>
         <Modal />
-        <h1>Lobby</h1>
-        { this.props.match.params.id }
+        <div className={classes.Lobby}>
+          <section className={classes.Header}>
+            <h1>Lobby</h1>
+            <div>
+              <hr />
+            </div>
+            <h2 ref={copyRef => (this.copyRef = copyRef)}>
+              {window.location.origin + "/" + this.props.match.params.id}
+            </h2>
+            <img onClick={() => copy(window.location.origin + "/" + this.props.match.params.id)} src={copyImg} alt="copy" />
+          </section>
+        </div>
       </Fragment>
     );
   }

@@ -20,8 +20,8 @@ export class LobbyCreate extends Component {
     ],
     selectedGame: null,
     visibilities: [
-      { value: "private", label: "Privat" },
-      { value: "public", label: "Öffentlich" }
+      { value: "public", label: "Öffentlich" },
+      { value: "private", label: "Privat" }
     ],
     selectedVisibility: null,
     players: {
@@ -90,7 +90,7 @@ export class LobbyCreate extends Component {
 
   componentDidUpdate() {
     if (this.props.id) {
-      this.props.history.push("/lobby/" + this.props.id);
+      this.props.history.push("/" + this.props.id);
     }
   }
 
