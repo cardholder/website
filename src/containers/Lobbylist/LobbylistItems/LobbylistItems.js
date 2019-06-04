@@ -1,30 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row } from "reactstrap";
-import posed from "react-pose";
+import posed, { PoseGroup } from "react-pose";
 import { withRouter } from "react-router-dom";
 import LobbylistItem from "./LobbylistItem/LobbylistItem";
 
 import classes from "./LobbylistItems.css";
 
 export class LobbylistItems extends Component {
-  onClickHanlder = id => {
-    this.props.history.push("/" + id)
-  }
+  onClickHandler = id => {
+    this.props.history.push("/" + id);
+  };
 
   render() {
     const Box = posed.div({
       hoverable: true,
       pressable: true,
-      init: {
-        scale: 1
-      },
-      hover: {
-        scale: 1.025
-      },
+      init: { y: 0 },
+      hover: { y: -3 },
       press: {
         scale: 1.025
-      },
+      }
     });
 
     let lobbies = null;
@@ -35,7 +31,7 @@ export class LobbylistItems extends Component {
           className={[classes.LobbylistItems, "col-sm-6"].join(" ")}
         >
           <LobbylistItem
-            onClick={this.onClickHanlder}
+            onClick={this.onClickHandler}
             id={lobby.id}
             game={lobby.game}
             maxPlayers={lobby.max_players}
@@ -47,7 +43,9 @@ export class LobbylistItems extends Component {
 
     return (
       <Container>
-        <Row className={classes.Lobbylist}>{lobbies}</Row>
+        <Row className={classes.Lobbylist}>
+          <PoseGroup>{lobbies}</PoseGroup>
+        </Row>
       </Container>
     );
   }

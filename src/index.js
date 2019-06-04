@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
+import { StyleRoot } from "radium";
+
 import generalReducer from "./store/reducers/general";
 import lobbylistReducer from "./store/reducers/lobbylist";
 import lobbyReducer from "./store/reducers/lobby";
@@ -30,7 +32,9 @@ const store = createStore(
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <StyleRoot>
+        <App />
+      </StyleRoot>
     </BrowserRouter>
   </Provider>
 );

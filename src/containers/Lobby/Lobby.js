@@ -8,6 +8,11 @@ import * as config from "../../config";
 import copyImg from "../../assets/copy.svg";
 import copy from "copy-to-clipboard";
 
+import posed from "react-pose";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
 import classes from "./Lobby.css";
 
 class Lobby extends Component {
@@ -44,6 +49,13 @@ class Lobby extends Component {
   }
 
   render() {
+    const Box = posed.div({
+      hoverable: true,
+      pressable: true,
+      init: { scale: 1 },
+      press: { scale: 2 }
+    });
+
     return (
       <Fragment>
         <Modal />
@@ -53,17 +65,31 @@ class Lobby extends Component {
             <div>
               <hr />
             </div>
-            <h2 ref={copyRef => (this.copyRef = copyRef)}>
-              {window.location.origin + "/" + this.props.match.params.id}
-            </h2>
-            <img
-              onClick={() =>
-                copy(window.location.origin + "/" + this.props.match.params.id)
-              }
-              src={copyImg}
-              alt="copy"
-            />
+            <section>
+              <h2 ref={copyRef => (this.copyRef = copyRef)}>
+                {window.location.origin + "/" + this.props.match.params.id}
+              </h2>
+              <Box>
+                <img
+                  onClick={() =>
+                    copy(
+                      window.location.origin + "/" + this.props.match.params.id
+                    )
+                  }
+                  src={copyImg}
+                  alt="copy"
+                />
+              </Box>
+            </section>
           </section>
+          <main>
+            <div>
+              Kartenspiel{" "}
+              <span>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </span>
+            </div>
+          </main>
         </div>
       </Fragment>
     );

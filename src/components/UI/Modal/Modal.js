@@ -13,17 +13,20 @@ class Modal extends Component {
   constructor(props) {
     super(props);
 
-    let username = localStorage.getItem('username');
-    if(username) {
+    let username = localStorage.getItem("username");
+    if (username) {
       props.setUsername(username);
+    } else {
+      username = "";
     }
 
     this.state = {
       username: username,
-      remember: false
+      remember: false,
+      isValid: false,
+      isTouched: false
     };
   }
-  
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
@@ -44,13 +47,18 @@ class Modal extends Component {
 
   setUsername = () => {
     if (this.state.remember) {
-      localStorage.setItem('username', this.state.username);
+      localStorage.setItem("username", this.state.username);
     }
     this.props.setUsername(this.state.username);
   };
 
   onChangeUsername = event => {
-    this.setState({ username: event.target.value });
+    this.setState({ username: event.target.value, isTouched: true });
+    if (event.target.value.length > 0) {
+      this.setState({ isValid: true });
+    } else {
+      this.setState({ isValid: false });
+    }
   };
 
   render() {
@@ -87,7 +95,11 @@ class Modal extends Component {
             <Button onClick={this.abort}>Abbrechen</Button>
             <Button
               onClick={this.setUsername}
-              disabled={this.state.username === ""}
+              disabled={
+                this.state.username === "" ||
+                !this.state.isValid ||
+                !this.state.isTouched
+              }
             >
               Bestätigen
             </Button>

@@ -2,16 +2,20 @@
     display: flex;
 }
 
+.Header section {
+    display: flex;
+}
+
 .Header div hr {
     width: 12px;
     border-top: 1px solid #777777;
-    margin-top: 30px; 
+    margin-top: 30px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .Header img {
-    margin-top: 17px; 
+    margin-top: 17px;
     margin-left: 5px;
     height: 22px;
 }
@@ -21,4 +25,23 @@
     font-weight: 100;
     color: #777777;
     margin-top: 17px;
+}
+
+.Lobby main {
+    padding-top: 15px;
+}
+
+@media (max-width: 815px) {
+    .Header {
+        display: inline-block;
+    }
+    .Header img {
+        height: 18px;
+    }
+    .Header h2 {
+        font-size: 18px;
+    }
+    .Header hr {
+        display: none;
+    }
 }
