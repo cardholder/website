@@ -34,11 +34,7 @@ class Layout extends Component {
       this.setState({
         showSideDrawer: false
       });
-    } else {
-      this.setState({
-        showSideDrawer: true
-      });
-    }
+    } 
   }
 
   render() {

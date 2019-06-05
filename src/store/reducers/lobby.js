@@ -11,6 +11,7 @@ const initialState = {
   max_players: null,
   websocket: null,
   connected: false,
+  isLeader: false,
   error: false
 };
 
@@ -19,17 +20,37 @@ const onMessage = (state, action) => {
   let data = JSON.parse(action.data);
 
   if (data.lobby) {
+    let me = data.lobby.players.find(player => {
+      return player.id === data.your_id;
+    })
+
+    let isLeader = false;
+    if (me.role === "leader") {
+      isLeader = true;
+    }
+
     modifiedState = updateObject(modifiedState, {
       lobby_id: data.lobby.id,
       game: data.lobby.game,
       players: data.lobby.players,
-      player_id: data.lobby.your_id,
+      player_id: data.your_id,
       visibility: data.lobby.visibility,
-      max_players: data.lobby.max_players
+      max_players: data.lobby.max_players,
+      isLeader: isLeader
     });
   } else if (data.players) {
+    let me = data.players.find(player => {
+      return player.id === state.player_id;
+    })
+
+    let isLeader = false;
+    if (me.role === "leader") {
+      isLeader = true;
+    }
+
     modifiedState = updateObject(modifiedState, {
-      players: data.players
+      players: data.players,
+      isLeader: isLeader
     });
   }
 

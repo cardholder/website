@@ -6,7 +6,10 @@ import Modal from "../../components/UI/Modal/Modal";
 import * as lobbyActions from "../../store/actions/lobby";
 import * as config from "../../config";
 import copyImg from "../../assets/copy.svg";
+import removeImg from "../../assets/cross-out.svg";
+import leaderImg from "../../assets/crown.svg";
 import copy from "copy-to-clipboard";
+import { Button } from "reactstrap";
 
 import posed from "react-pose";
 
@@ -42,13 +45,20 @@ class Lobby extends Component {
         sent: true
       });
     }
-
-    console.log(this.props);
   }
 
   componentWillUnmount() {
     this.props.disconnect();
   }
+
+  abort = () => {
+    this.props.disconnect();
+    this.props.history.push("/lobby");
+  };
+
+  removePlayer = id => {
+    console.log("[Remove player] - ID: " + id);
+  };
 
   render() {
     const Box = posed.div({
@@ -57,6 +67,36 @@ class Lobby extends Component {
       init: { scale: 1 },
       press: { scale: 2 }
     });
+
+    let players = null;
+    if (this.props.players) {
+      players = this.props.players.map(player => {
+        return (
+          <div key={player.id} className={classes.Player}>
+            <div>
+              {player.role === "leader" ? (
+                <img src={leaderImg} alt="leader" />
+              ) : null}
+              {this.props.isLeader && player.role !== "leader" ? (
+                <img
+                  className={classes.Close}
+                  src={removeImg}
+                  alt="remove"
+                  onClick={() => this.removePlayer(player.id)}
+                />
+              ) : null}
+            </div>
+            <p
+              className={
+                this.props.player_id === player.id ? classes.Black : null
+              }
+            >
+              {player.name}
+            </p>
+          </div>
+        );
+      });
+    }
 
     return (
       <Fragment>
@@ -84,14 +124,51 @@ class Lobby extends Component {
               </Box>
             </section>
           </section>
-          <main>
-            <div>
-              Kartenspiel{" "}
-              <span>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </span>
-            </div>
+          <main className={classes.Content}>
+            <section>
+              <div className={classes.ListItem}>
+                Kartenspiel
+                <span>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                  {this.props.game}
+                </span>
+              </div>
+              <div className={classes.ListItem}>
+                Lobbyart
+                <span>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                  {this.props.visibility === "public" ? "Öffentlich" : "Privat"}
+                </span>
+              </div>
+            </section>
+            <section className={classes.PlayerContent}>
+              <div className={classes.ListItem}>
+                Spieler
+                <span>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                  {this.props.players.length +
+                    " / " +
+                    this.props.max_players +
+                    " Spieler"}
+                </span>
+              </div>
+              <div className={classes.Players}>{players}</div>
+            </section>
           </main>
+
+          <section>
+            <Button onClick={this.abort}>Abbrechen</Button>
+            {this.props.isLeader ? (
+              <Button
+                disabled={
+                  this.props.players.length < 2 ||
+                  this.props.players.length > this.props.max_players
+                }
+              >
+                Spiel starten
+              </Button>
+            ) : null}
+          </section>
         </div>
       </Fragment>
     );
@@ -109,7 +186,8 @@ const mapStateToProps = state => ({
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error,
-  username: state.general.username
+  username: state.general.username,
+  isLeader: state.lobby.isLeader
 });
 
 const mapDispatchToProps = dispatch => ({
