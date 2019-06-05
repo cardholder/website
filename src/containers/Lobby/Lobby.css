@@ -17,11 +17,11 @@
 .Header img {
     margin-top: 17px;
     margin-left: 5px;
-    height: 22px;
+    height: 18px;
 }
 
 .Header h2 {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 100;
     color: #777777;
     margin-top: 17px;
@@ -34,12 +34,6 @@
 @media (max-width: 815px) {
     .Header {
         display: inline-block;
-    }
-    .Header img {
-        height: 18px;
-    }
-    .Header h2 {
-        font-size: 18px;
     }
     .Header hr {
         display: none;

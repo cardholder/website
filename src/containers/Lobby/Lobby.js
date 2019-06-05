@@ -42,6 +42,8 @@ class Lobby extends Component {
         sent: true
       });
     }
+
+    console.log(this.props);
   }
 
   componentWillUnmount() {
@@ -98,7 +100,12 @@ class Lobby extends Component {
 
 const mapStateToProps = state => ({
   id: state.lobby.id,
-  lobby: state.lobby.data,
+  lobby_id: state.lobby.lobby_id,
+  player_id: state.lobby.player_id,
+  visibility: state.lobby.visibility,
+  max_players: state.lobby.max_players,
+  game: state.lobby.game,
+  players: state.lobby.players,
   websocket: state.lobby.websocket,
   connected: state.lobby.connected,
   error: state.lobby.error,
