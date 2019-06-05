@@ -23,8 +23,8 @@
     margin: 15px 15px;
     color: #000;
     transition: transform 0.3s ease-out;
-    width: 30px;
-    height: 40px;
+    width: 40px;
+    height: 30px;
 }
 
 .Icon:hover {
@@ -59,6 +59,7 @@
 .hamburger {
     display: block;
     position: absolute;
+    height: 40;
 }
 
 .hamburger__inner {
