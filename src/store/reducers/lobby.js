@@ -12,6 +12,8 @@ const initialState = {
   websocket: null,
   connected: false,
   isLeader: false,
+  isKicked: false,
+  message: "",
   error: false
 };
 
@@ -22,7 +24,7 @@ const onMessage = (state, action) => {
   if (data.lobby) {
     let me = data.lobby.players.find(player => {
       return player.id === data.your_id;
-    })
+    });
 
     let isLeader = false;
     if (me.role === "leader") {
@@ -41,7 +43,7 @@ const onMessage = (state, action) => {
   } else if (data.players) {
     let me = data.players.find(player => {
       return player.id === state.player_id;
-    })
+    });
 
     let isLeader = false;
     if (me.role === "leader") {
@@ -52,6 +54,10 @@ const onMessage = (state, action) => {
       players: data.players,
       isLeader: isLeader
     });
+  } else if (data.message) {
+    modifiedState = updateObject(modifiedState, {
+      message: data.message
+    })
   }
 
   return modifiedState;
@@ -69,6 +75,21 @@ export const onDisconnect = (state, action) => {
   });
 };
 
+export const onClose = (state, action) => {
+  return updateObject(state, {
+    lobby_id: null,
+    player_id: null,
+    players: [],
+    game: null,
+    visibility: null,
+    max_players: null,
+    websocket: null,
+    connected: false,
+    isLeader: false,
+    isKicked: false
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOBBY_OPEN:
@@ -76,7 +97,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.LOBBY_MESSAGE:
       return onMessage(state, action);
     case actionTypes.LOBBY_CLOSE:
-      return ws.onClose(state, action);
+      let modifiedState = onClose(state, action);
+      return ws.onClose(modifiedState, action);
     case actionTypes.LOBBY_DISCONNECT:
       return onDisconnect(state, action);
     case actionTypes.LOBBY_BROKEN:

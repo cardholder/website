@@ -45,6 +45,11 @@ class Lobby extends Component {
         sent: true
       });
     }
+
+    if (this.props.message === "Lobby is full!" || 
+        this.props.message === "You got kicked!") {
+      this.props.history.push("/lobby");
+    }
   }
 
   componentWillUnmount() {
@@ -58,6 +63,9 @@ class Lobby extends Component {
 
   removePlayer = id => {
     console.log("[Remove player] - ID: " + id);
+    this.props.sendMessage({
+      player_id: id
+    });
   };
 
   render() {
@@ -187,7 +195,8 @@ const mapStateToProps = state => ({
   connected: state.lobby.connected,
   error: state.lobby.error,
   username: state.general.username,
-  isLeader: state.lobby.isLeader
+  isLeader: state.lobby.isLeader,
+  message: state.lobby.message
 });
 
 const mapDispatchToProps = dispatch => ({
