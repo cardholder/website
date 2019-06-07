@@ -62,7 +62,6 @@ class Lobby extends Component {
   };
 
   removePlayer = id => {
-    console.log("[Remove player] - ID: " + id);
     this.props.sendMessage({
       player_id: id
     });

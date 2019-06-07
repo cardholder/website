@@ -86,7 +86,8 @@ export const onClose = (state, action) => {
     websocket: null,
     connected: false,
     isLeader: false,
-    isKicked: false
+    isKicked: false,
+    message: ""
   });
 };
 
