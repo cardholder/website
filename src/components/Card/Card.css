@@ -1,0 +1,48 @@
+.Card {
+    border-radius: 5px;
+    padding: 0 3px;
+    background-color: #fff;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Card section {
+    width: 100%;
+    display: block;
+}
+
+.Card section:last-of-type {
+    margin: 0 !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Card section:last-of-type div {
+    transform: scaleY(-1) scaleX(-1);
+}
+
+.Card span {
+    display: block;
+}
+
+.Card span:first-child {
+    padding: 0 3px;
+}
+
+.Card span:last-of-type {
+    margin-top: -6px;
+}
+
+.Black {
+    color: #1B1C1B;
+}
+
+.Red {
+    color: #FF4040;
+}

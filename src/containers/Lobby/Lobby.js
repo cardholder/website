@@ -4,12 +4,15 @@ import { connect } from "react-redux";
 
 import Modal from "../../components/UI/Modal/Modal";
 import * as lobbyActions from "../../store/actions/lobby";
+import * as lobbyListActions from "../../store/actions/lobbylist";
 import * as config from "../../config";
 import copyImg from "../../assets/copy.svg";
 import removeImg from "../../assets/cross-out.svg";
 import leaderImg from "../../assets/crown.svg";
 import copy from "copy-to-clipboard";
 import { Button } from "reactstrap";
+
+import Card from "../../components/Card/Card";
 
 import posed from "react-pose";
 
@@ -46,8 +49,11 @@ class Lobby extends Component {
       });
     }
 
-    if (this.props.message === "Lobby is full!" || 
-        this.props.message === "You got kicked!") {
+    if (
+      this.props.message === "Lobby is full!" ||
+      this.props.message === "You got kicked!"
+    ) {
+      this.props.setError(this.props.message);
       this.props.history.push("/lobby");
     }
   }
@@ -161,6 +167,8 @@ class Lobby extends Component {
               </div>
               <div className={classes.Players}>{players}</div>
             </section>
+            <Card height={90} width={60} />
+
           </main>
 
           <section>
@@ -202,7 +210,8 @@ const mapDispatchToProps = dispatch => ({
   connect: id =>
     dispatch(lobbyActions.connect(config.SOCKET_API + "lobby/" + id + "/")),
   disconnect: () => dispatch(lobbyActions.lobbyDisconnect()),
-  sendMessage: message => dispatch(lobbyActions.sendMessage(message))
+  sendMessage: message => dispatch(lobbyActions.sendMessage(message)),
+  setError: message => dispatch(lobbyListActions.setErrorMessage(message))
 });
 
 export default connect(
