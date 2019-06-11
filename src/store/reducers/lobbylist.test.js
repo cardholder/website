@@ -7,7 +7,8 @@ describe("lobbylist reducer", () => {
       data: null,
       websocket: null,
       connected: false,
-      error: false
+      error: false,
+      errorMessage: ""
     });
   });
 
@@ -51,7 +52,8 @@ describe("lobbylist reducer", () => {
       ],
       websocket: null,
       connected: false,
-      error: false
+      error: false,
+      errorMessage: ""
     });
   });
 });
