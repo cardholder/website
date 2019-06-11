@@ -6,7 +6,8 @@ const initialState = {
   data: null,
   websocket: null,
   connected: false,
-  error: false
+  error: false,
+  errorMessage: ""
 };
 
 const sortLobby = state => {
@@ -61,6 +62,8 @@ const reducer = (state = initialState, action) => {
       return ws.onError(state, action);
     case actionTypes.SEND_LOBBYLIST:
       return ws.onSendMessage(state, action);
+    case actionTypes.ERROR_LOBBYLIST:
+      return updateObject(state, { errorMessage: action.message });
     default:
       return state;
   }

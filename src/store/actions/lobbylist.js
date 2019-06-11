@@ -22,3 +22,10 @@ export const sendMessage = (message) => {
         message: message
     }
 }
+
+export const setErrorMessage = (message) => {
+    return {
+        type: actionTypes.ERROR_LOBBYLIST,
+        message: message
+    }
+}

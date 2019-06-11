@@ -27,7 +27,7 @@ const onMessage = (state, action) => {
     });
 
     let isLeader = false;
-    if (me.role === "leader") {
+    if (me.role !== undefined && me.role === "leader") {
       isLeader = true;
     }
 

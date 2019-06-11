@@ -123,6 +123,7 @@ export class LobbyCreate extends Component {
                   }
                   value={this.state.players.value}
                   onChange={this.onPlayersChange}
+                  onEnter={this.send}
                 />
               </div>
               <div>
