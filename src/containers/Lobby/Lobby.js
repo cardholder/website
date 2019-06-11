@@ -64,6 +64,7 @@ class Lobby extends Component {
 
   abort = () => {
     this.props.disconnect();
+    this.props.setError("");
     this.props.history.push("/lobby");
   };
 
