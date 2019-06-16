@@ -1,0 +1,27 @@
+.Board {
+    height: 100%;
+}
+
+.Board > section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.Board > section > div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Board > section > div > section {
+    display: flex;
+}
+
+.Board > section > div > section > div {
+    z-index: 90;
+}
+
+.Board > section > div > section > div:not(:first-of-type) {
+    margin-left: -40px;
+}

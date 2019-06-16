@@ -7,6 +7,7 @@ import Lobbylist from "./containers/Lobbylist/Lobbylist";
 import Imprint from "./components/Imprint/Imprint";
 import LobbyCreate from "./containers/Lobby/LobbyCreate/LobbyCreate";
 import Lobby from "./containers/Lobby/Lobby";
+import Game from "./containers/Game/Game";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/lobby" component={Lobbylist} exact />
           <Route path="/lobby/create" component={LobbyCreate} exact />
           <Route path="/imprint" component={Imprint} exact />
+          <Route path="/game/:id" component={Game} />
           <Route path="/:id" component={Lobby} />
         </Switch>
       </Layout>

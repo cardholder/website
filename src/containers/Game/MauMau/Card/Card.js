@@ -27,42 +27,69 @@ const card = props => {
     }
   };
 
-  let obj = cardTypes.clubs;
-
   let Box = posed.div({
-    draggable: true
+    hoverable: props.isHoverable,
+    init: { y: 0 },
+    hover: { y: -20 }
   });
 
   let card = null;
+  let currentCard = cardTypes.heart;
+
+  switch (props.symbol) {
+    case "d":
+      currentCard = cardTypes.diamonds;
+      break;
+    case "c":
+      currentCard = cardTypes.clubs;
+      break;
+    case "s":
+      currentCard = cardTypes.spades;
+      break;
+    case "h":
+      currentCard = cardTypes.heart;
+      break;
+    default:
+      currentCard = cardTypes.heart;
+      break;
+  }
 
   if (props.hide) {
     card = (
       <Fragment>
         <section className={classes.Hide}>
           <div>
-            <span className={cardTypes.heart.class}>{cardTypes.heart.text}</span>
-            <span className={cardTypes.spades.class}>{cardTypes.spades.text}</span>
+            <span className={cardTypes.heart.class}>
+              {cardTypes.heart.text}
+            </span>
+            <span className={cardTypes.spades.class}>
+              {cardTypes.spades.text}
+            </span>
           </div>
           <div>
-            <span className={cardTypes.clubs.class}>{cardTypes.clubs.text}</span>
-            <span className={cardTypes.diamonds.class}>{cardTypes.diamonds.text}</span>
+            <span className={cardTypes.clubs.class}>
+              {cardTypes.clubs.text}
+            </span>
+            <span className={cardTypes.diamonds.class}>
+              {cardTypes.diamonds.text}
+            </span>
           </div>
         </section>
       </Fragment>
-    )
+    );
   } else {
     card = (
       <Fragment>
         <section>
           <div>
-            <span>7</span>
-            {obj.text}
+            <span>{props.value}</span>
+            {currentCard.text}
           </div>
         </section>
         <section>
           <div>
-            <span>7</span>
-            {obj.text}
+            <span>{props.value}</span>
+            {currentCard.text}
           </div>
         </section>
       </Fragment>
@@ -76,7 +103,7 @@ const card = props => {
         width: props.width !== undefined ? props.width : 60,
         fontSize: props.fontSize !== undefined ? props.fontSize : 16
       }}
-      className={[classes.Card, obj.class].join(" ")}
+      className={[classes.Card, currentCard.class].join(" ")}
     >
       {card}
     </Box>
