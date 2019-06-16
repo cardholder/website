@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import posed from "react-pose";
 
 import classes from "./Card.css";
@@ -33,7 +33,41 @@ const card = props => {
     draggable: true
   });
 
-  console.log(props.fontSize);
+  let card = null;
+
+  if (props.hide) {
+    card = (
+      <Fragment>
+        <section className={classes.Hide}>
+          <div>
+            <span className={cardTypes.heart.class}>{cardTypes.heart.text}</span>
+            <span className={cardTypes.spades.class}>{cardTypes.spades.text}</span>
+          </div>
+          <div>
+            <span className={cardTypes.clubs.class}>{cardTypes.clubs.text}</span>
+            <span className={cardTypes.diamonds.class}>{cardTypes.diamonds.text}</span>
+          </div>
+        </section>
+      </Fragment>
+    )
+  } else {
+    card = (
+      <Fragment>
+        <section>
+          <div>
+            <span>7</span>
+            {obj.text}
+          </div>
+        </section>
+        <section>
+          <div>
+            <span>7</span>
+            {obj.text}
+          </div>
+        </section>
+      </Fragment>
+    );
+  }
 
   return (
     <Box
@@ -44,18 +78,7 @@ const card = props => {
       }}
       className={[classes.Card, obj.class].join(" ")}
     >
-      <section>
-        <div>
-          <span>7</span>
-          {obj.text}
-        </div>
-      </section>
-      <section>
-        <div>
-          <span>7</span>
-          {obj.text}
-        </div>
-      </section>
+      {card}
     </Box>
   );
 };
