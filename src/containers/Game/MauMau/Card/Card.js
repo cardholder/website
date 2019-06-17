@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import posed from "react-pose";
+import cover from "../../../../assets/cover.svg";
 
 import classes from "./Card.css";
 
@@ -58,22 +59,7 @@ const card = props => {
     card = (
       <Fragment>
         <section className={classes.Hide}>
-          <div>
-            <span className={cardTypes.heart.class}>
-              {cardTypes.heart.text}
-            </span>
-            <span className={cardTypes.spades.class}>
-              {cardTypes.spades.text}
-            </span>
-          </div>
-          <div>
-            <span className={cardTypes.clubs.class}>
-              {cardTypes.clubs.text}
-            </span>
-            <span className={cardTypes.diamonds.class}>
-              {cardTypes.diamonds.text}
-            </span>
-          </div>
+          <img src={cover} alt="cover" />
         </section>
       </Fragment>
     );
