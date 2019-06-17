@@ -54,6 +54,10 @@ class Lobby extends Component {
       this.props.setError(this.props.message);
       this.props.history.push("/lobby");
     }
+
+    if (this.props.message === "Game is started") {
+      this.props.history.push("/game/" + this.props.match.params.id);
+    }
   }
 
   componentWillUnmount() {
@@ -166,13 +170,17 @@ class Lobby extends Component {
               </div>
               <div className={classes.Players}>{players}</div>
             </section>
-
           </main>
 
           <section>
             <Button onClick={this.abort}>Abbrechen</Button>
             {this.props.isLeader ? (
               <Button
+                onClick={() => {
+                  this.props.sendMessage({
+                    message: "start"
+                  })
+                }}
                 disabled={
                   this.props.players.length < 2 ||
                   this.props.players.length > this.props.max_players

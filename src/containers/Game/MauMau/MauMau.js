@@ -24,6 +24,8 @@ class MauMau extends Component {
               <Card hide />
               <Card hide />
               <Card hide />
+              <Card hide />
+              <Card hide />
             </div>
           </section>
           <section>
