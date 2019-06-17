@@ -12,8 +12,6 @@ import leaderImg from "../../assets/crown.svg";
 import copy from "copy-to-clipboard";
 import { Button } from "reactstrap";
 
-import Card from "../../components/Card/Card";
-
 import posed from "react-pose";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -168,7 +166,6 @@ class Lobby extends Component {
               </div>
               <div className={classes.Players}>{players}</div>
             </section>
-            <Card height={90} width={60} />
 
           </main>
 

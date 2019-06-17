@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    user-select: none;
 }
 
 .Card section {
@@ -37,6 +38,7 @@
 
 .Card span:last-of-type {
     margin-top: -6px;
+    margin-left: 3px;
 }
 
 .Black {
@@ -45,4 +47,31 @@
 
 .Red {
     color: #FF4040;
+}
+
+
+.Hide {
+    flex-direction: column;
+    justify-content: center !important;
+    text-align: center;
+    font-size: 26px;
+    height: 100%;
+}
+
+.Hide div {
+    transform: none !important;
+    display: flex;
+    justify-content: center;
+    height: 26px;
+    margin-bottom: -4px;
+}
+
+.Hide div:last-of-type {
+    margin-top: -4px;
+}
+
+.Hide div span {
+    padding: 0 !important;
+    margin: 0;
+    margin-top: -5px !important;
 }
