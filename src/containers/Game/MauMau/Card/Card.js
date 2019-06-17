@@ -1,11 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import posed from "react-pose";
 import cover from "../../../../assets/cover.svg";
 
 import classes from "./Card.css";
 
-const card = props => {
-  const cardTypes = {
+class Card extends Component {
+  state = {
+    onTurn: this.props.onTurn
+  }
+
+  cardTypes = {
     heart: {
       text: <span>&hearts;</span>,
       color: "Red",
@@ -28,72 +32,78 @@ const card = props => {
     }
   };
 
-  let Box = posed.div({
-    hoverable: props.isHoverable,
-    init: { y: 0 },
-    hover: { y: -20 }
-  });
-
-  let card = null;
-  let currentCard = cardTypes.heart;
-
-  switch (props.symbol) {
-    case "d":
-      currentCard = cardTypes.diamonds;
-      break;
-    case "c":
-      currentCard = cardTypes.clubs;
-      break;
-    case "s":
-      currentCard = cardTypes.spades;
-      break;
-    case "h":
-      currentCard = cardTypes.heart;
-      break;
-    default:
-      currentCard = cardTypes.heart;
-      break;
+  onTurnHandler = () => {
+    this.setState({onTurn: true})
   }
 
-  if (props.hide) {
-    card = (
-      <Fragment>
-        <section className={classes.Hide}>
-          <img src={cover} alt="cover" />
-        </section>
-      </Fragment>
-    );
-  } else {
-    card = (
-      <Fragment>
-        <section>
-          <div>
-            <span>{props.value}</span>
-            {currentCard.text}
-          </div>
-        </section>
-        <section>
-          <div>
-            <span>{props.value}</span>
-            {currentCard.text}
-          </div>
-        </section>
-      </Fragment>
+  render() {
+    let Box = posed.div({
+      hoverable: this.props.isHoverable,
+      init: { y: 0 },
+      hover: { y: -20 }
+    });
+  
+    let card = null;
+    let currentCard = this.cardTypes.heart;
+  
+    switch (this.props.symbol) {
+      case "d":
+        currentCard = this.cardTypes.diamonds;
+        break;
+      case "c":
+        currentCard = this.cardTypes.clubs;
+        break;
+      case "s":
+        currentCard = this.cardTypes.spades;
+        break;
+      case "h":
+        currentCard = this.cardTypes.heart;
+        break;
+      default:
+        currentCard = this.cardTypes.heart;
+        break;
+    }
+  
+    if (this.props.hide) {
+      card = (
+        <Fragment>
+          <section className={classes.Hide}>
+            <img src={cover} alt="cover" />
+          </section>
+        </Fragment>
+      );
+    } else {
+      card = (
+        <div onClick={this.onTurnHandler}>
+          <section>
+            <div>
+              <span>{this.props.value}</span>
+              {currentCard.text}
+            </div>
+          </section>
+          <section>
+            <div>
+              <span>{this.props.value}</span>
+              {currentCard.text}
+            </div>
+          </section>
+        </div>
+      );
+    }
+  
+    return (
+      <Box
+        style={{
+          height: this.props.height !== undefined ? this.props.height : 90,
+          width: this.props.width !== undefined ? this.props.width : 60,
+          fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 16
+        }}
+        className={[classes.Card, currentCard.class, this.state.onTurn ? classes.OnTurn : null].join(" ")}
+      >
+        {card}
+      </Box>
     );
   }
-
-  return (
-    <Box
-      style={{
-        height: props.height !== undefined ? props.height : 90,
-        width: props.width !== undefined ? props.width : 60,
-        fontSize: props.fontSize !== undefined ? props.fontSize : 16
-      }}
-      className={[classes.Card, currentCard.class].join(" ")}
-    >
-      {card}
-    </Box>
-  );
 };
 
-export default card;
+export default Card;

@@ -14,18 +14,55 @@
     justify-content: space-evenly;
 }
 
-.Board>section>div>section {
+.Board>section>div>section>div {
     display: flex;
+    justify-content: center;
 }
 
-.Board>section>div:not(:nth-child(2))>section {
+.Board>section>div>section>section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.Board>section>div>section>section p {
+    padding: 0;
+    padding-right: 10px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.Board>section>div>section>section>img {
+    margin-top: 2px;
+    margin-right: 5px;
+    height: 16px;
+}
+
+.Board>section>div:not(:nth-child(2))>section>div {
     min-width: 260px;
 }
 
-.Board>section>div>section>div {
+.Board>section>div:nth-child(2) {
+    display: flex;
+    justify-content: center !important;
+}
+
+.Board>section>div:nth-child(2)>section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    min-width: 70px;
+}
+
+.Board>section>div:nth-child(2)>section:last-of-type>div {
+    margin-top: 18px; 
+}
+
+.Board>section>div>section>div>div {
     z-index: 90;
 }
 
-.Board>section>div>section>div:not(:first-of-type) {
+.Board>section>div>section>div>div:not(:first-of-type) {
     margin-left: -40px;
 }

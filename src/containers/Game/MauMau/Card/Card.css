@@ -61,3 +61,9 @@
 .Hide img {
     width: 100%;
 }
+
+.Card.OnTurn {
+    position: absolute;
+    top: calc(50% - 42px);
+    left: calc(50% + 40px);
+}
