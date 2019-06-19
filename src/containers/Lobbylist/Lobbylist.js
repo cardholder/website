@@ -15,6 +15,7 @@ import {
 } from "react-notifications";
 
 import * as actions from "../../store/actions/lobbylist";
+import * as generalActions from "../../store/actions/general";
 import * as config from "../../config";
 
 import classes from "./Lobbylist.css";
@@ -27,6 +28,7 @@ export class Lobbylist extends Component {
   componentDidMount() {
     this.props.connect();
     this.showError();
+    this.props.resetPlayerID();
   }
 
   componentDidUpdate() {
@@ -108,7 +110,8 @@ const mapDispatchToProps = dispatch => ({
   connect: () => dispatch(actions.connect(config.SOCKET_API + "lobbylist/")),
   disconnect: () => dispatch(actions.disconnect()),
   sendMessage: message => dispatch(actions.sendMessage(message)),
-  setError: message => dispatch(actions.setErrorMessage(message))
+  setError: message => dispatch(actions.setErrorMessage(message)),
+  resetPlayerID: () => dispatch(generalActions.setPlayerID(-1))
 });
 
 export default connect(
