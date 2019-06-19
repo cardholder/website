@@ -6,3 +6,10 @@ export const setUsername = username => {
     username: username
   };
 };
+
+export const setPlayerID = player_id => {
+  return {
+    type: actionTypes.SET_PLAYERID,
+    player_id: player_id
+  };
+};

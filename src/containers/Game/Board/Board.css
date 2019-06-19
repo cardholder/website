@@ -64,5 +64,5 @@
 }
 
 .Board>section>div>section>div>div:not(:first-of-type) {
-    margin-left: -40px;
+    margin-left: -42px;
 }

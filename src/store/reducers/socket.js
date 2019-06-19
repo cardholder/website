@@ -21,7 +21,11 @@ export const onDisconnect = (state, action) => {
 };
 
 export const onError = (state, action) => {
-  return updateObject(state, { error: true });
+  return updateObject(state, {
+    error: true,
+    connected: false,
+    websocket: null
+  });
 };
 
 export const onSendMessage = (state, action) => {

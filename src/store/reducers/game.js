@@ -8,15 +8,16 @@ const initialState = {
   websocket: null,
   connected: false,
   error: false,
-  status: "",
-  sent: false
+  status: ""
 };
 
-const onCreated = (state, action) => {
-  return updateObject(state, { id: JSON.parse(action.data).id });
+const onMessage = (state, action) => {
+  console.log(action);
+  return state;
 };
 
 export const onDisconnect = (state, action) => {
+    console.log(action);
   if (state.websocket) {
     state.websocket.close();
   }
@@ -30,17 +31,17 @@ export const onDisconnect = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CREATE_OPEN:
+    case actionTypes.GAME_OPEN:
       return ws.onOpen(state, action);
-    case actionTypes.CREATE_MESSAGE:
-      return onCreated(state, action);
-    case actionTypes.CREATE_CLOSE:
+    case actionTypes.GAME_MESSAGE:
+      return onMessage(state, action);
+    case actionTypes.GAME_CLOSE:
       return ws.onClose(state, action);
-    case actionTypes.CREATE_DISCONNECT:
+    case actionTypes.GAME_DISCONNECT:
       return onDisconnect(state, action);
-    case actionTypes.CREATE_BROKEN:
+    case actionTypes.GAME_BROKEN:
       return ws.onError(state, action);
-    case actionTypes.CREATE_SEND:
+    case actionTypes.GAME_SEND:
       return ws.onSendMessage(state, action);
     default:
       return state;

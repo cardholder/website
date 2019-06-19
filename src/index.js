@@ -14,6 +14,7 @@ import generalReducer from "./store/reducers/general";
 import lobbylistReducer from "./store/reducers/lobbylist";
 import lobbyReducer from "./store/reducers/lobby";
 import createReducer from "./store/reducers/create";
+import gameReducer from "./store/reducers/game";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   general: generalReducer,
   lobbylist: lobbylistReducer,
   lobby: lobbyReducer,
-  create: createReducer
+  create: createReducer,
+  game: gameReducer
 });
 
 const store = createStore(

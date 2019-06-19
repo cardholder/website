@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
 import Modal from "../../components/UI/Modal/Modal";
+import * as generalActions from "../../store/actions/general";
 import * as lobbyActions from "../../store/actions/lobby";
 import * as lobbyListActions from "../../store/actions/lobbylist";
 import * as config from "../../config";
@@ -56,6 +57,7 @@ class Lobby extends Component {
     }
 
     if (this.props.message === "Game is started") {
+      this.props.setPlayerID(this.props.player_id);
       this.props.history.push("/game/" + this.props.match.params.id);
     }
   }
@@ -217,7 +219,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(lobbyActions.connect(config.SOCKET_API + "lobby/" + id + "/")),
   disconnect: () => dispatch(lobbyActions.lobbyDisconnect()),
   sendMessage: message => dispatch(lobbyActions.sendMessage(message)),
-  setError: message => dispatch(lobbyListActions.setErrorMessage(message))
+  setError: message => dispatch(lobbyListActions.setErrorMessage(message)),
+  setPlayerID: id => dispatch(generalActions.setPlayerID(id))
 });
 
 export default connect(

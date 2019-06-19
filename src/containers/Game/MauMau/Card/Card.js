@@ -5,10 +5,6 @@ import cover from "../../../../assets/cover.svg";
 import classes from "./Card.css";
 
 class Card extends Component {
-  state = {
-    onTurn: this.props.onTurn
-  }
-
   cardTypes = {
     heart: {
       text: <span>&hearts;</span>,
@@ -31,10 +27,6 @@ class Card extends Component {
       class: classes.Red
     }
   };
-
-  onTurnHandler = () => {
-    this.setState({onTurn: true})
-  }
 
   render() {
     let Box = posed.div({
@@ -74,7 +66,7 @@ class Card extends Component {
       );
     } else {
       card = (
-        <div onClick={this.onTurnHandler}>
+        <div>
           <section>
             <div>
               <span>{this.props.value}</span>
@@ -90,15 +82,18 @@ class Card extends Component {
         </div>
       );
     }
+
+    console.log();
   
     return (
       <Box
         style={{
           height: this.props.height !== undefined ? this.props.height : 90,
           width: this.props.width !== undefined ? this.props.width : 60,
-          fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 16
+          fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 16,
+          ...this.props.style
         }}
-        className={[classes.Card, currentCard.class, this.state.onTurn ? classes.OnTurn : null].join(" ")}
+        className={[classes.Card, currentCard.class].join(" ")}
       >
         {card}
       </Box>
