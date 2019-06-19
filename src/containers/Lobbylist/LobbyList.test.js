@@ -15,7 +15,7 @@ describe("<Lobbylist />", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Lobbylist connect={() => {}} disconnect={() => {}} />);
+    wrapper = shallow(<Lobbylist connect={() => {}} disconnect={() => {}} resetPlayerID={() => {}} />);
     wrapper.setProps({ connected: true });
   });
 
