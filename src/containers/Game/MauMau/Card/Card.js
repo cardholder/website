@@ -59,14 +59,18 @@ class Card extends Component {
     if (this.props.hide) {
       card = (
         <Fragment>
-          <section className={classes.Hide}>
+          <section className={classes.Hide} onClick={this.props.isClickable}>
             <img src={cover} alt="cover" />
           </section>
         </Fragment>
       );
     } else {
       card = (
-        <div>
+        <div onClick={() => this.props.onTurn({
+          id: this.props.id,
+          value: this.props.value,
+          symbol: this.props.symbol
+        })}>
           <section>
             <div>
               <span>{this.props.value}</span>
@@ -82,8 +86,6 @@ class Card extends Component {
         </div>
       );
     }
-
-    console.log();
   
     return (
       <Box

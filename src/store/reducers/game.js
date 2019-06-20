@@ -8,16 +8,86 @@ const initialState = {
   websocket: null,
   connected: false,
   error: false,
-  status: ""
+  status: "",
+  message: "",
+  remaining_cards: 0,
+  cards: [],
+  current_player: null,
+  players: null,
+  top_card_of_discard_pile: null
+};
+
+const updatePlayer = (state, player) => {
+  let playerIndex = state.players.findIndex(obj => obj.id === player.id);
+  let players = [...state.players];
+  players[playerIndex].card_amount = player.card_amount;
+  return updateObject(state, { players: players });
 };
 
 const onMessage = (state, action) => {
-  console.log(action);
-  return state;
+  let data = JSON.parse(action.data);
+  let modifiedState = state;
+
+  console.log(data);
+
+  if (data.cards) {
+    modifiedState = updateObject(modifiedState, {
+      cards: data.cards
+    });
+  }
+
+  if (data.current_player) {
+    modifiedState = updateObject(modifiedState, {
+      current_player: data.current_player
+    });
+  }
+
+  if (data.top_card_of_discard_pile) {
+    modifiedState = updateObject(modifiedState, {
+      top_card_of_discard_pile: data.top_card_of_discard_pile
+    });
+  }
+
+  if (data.card) {
+    modifiedState = updateObject(modifiedState, {
+      top_card_of_discard_pile: data.card
+    });
+  }
+
+  if (data.cards_drawn) {
+    let cards = [...state.cards];
+
+    modifiedState = updateObject(modifiedState, {
+      cards: cards.concat(data.cards_drawn)
+    });
+  }
+
+  if (data.remaining_cards) {
+    modifiedState = updateObject(modifiedState, {
+      remaining_cards: data.remaining_cards
+    });
+  }
+
+  if (data.players) {
+    modifiedState = updateObject(modifiedState, {
+      players: data.players
+    });
+  }
+
+  if (data.player) {
+    modifiedState = updatePlayer(modifiedState, data.player);
+  }
+
+  if (data.message) {
+    modifiedState = updateObject(modifiedState, {
+      message: data.message
+    });
+  }
+
+  return modifiedState;
 };
 
 export const onDisconnect = (state, action) => {
-    console.log(action);
   if (state.websocket) {
     state.websocket.close();
   }

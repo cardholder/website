@@ -17,7 +17,6 @@ export const disconnect = () => {
 }
 
 export const sendMessage = (message) => {
-    console.log("SEND");
     return {
         type: actionTypes.GAME_SEND,
         message: message

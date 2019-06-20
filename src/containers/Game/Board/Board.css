@@ -47,7 +47,7 @@
     justify-content: center !important;
 }
 
-.Board>section>div:nth-child(2)>section {
+.Board>section>div:nth-child(2)>section p {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -65,4 +65,8 @@
 
 .Board>section>div>section>div>div:not(:first-of-type) {
     margin-left: -42px;
+}
+
+.Board .CurrentPlayer {
+    color: #FF4040;
 }
