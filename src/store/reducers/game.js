@@ -28,8 +28,6 @@ const onMessage = (state, action) => {
   let data = JSON.parse(action.data);
   let modifiedState = state;
 
-  console.log(data);
-
   if (data.cards) {
     modifiedState = updateObject(modifiedState, {
       cards: data.cards
@@ -113,6 +111,8 @@ const reducer = (state = initialState, action) => {
       return ws.onError(state, action);
     case actionTypes.GAME_SEND:
       return ws.onSendMessage(state, action);
+    case actionTypes.GAME_ERROR:
+      return updateObject(state, { message: action.message });
     default:
       return state;
   }
