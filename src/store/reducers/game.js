@@ -46,6 +46,12 @@ const onMessage = (state, action) => {
     });
   }
 
+  if (data.card) {
+    modifiedState = updateObject(modifiedState, {
+      top_card_of_discard_pile: data.card
+    });
+  }
+
   if (data.cards_drawn) {
     let cards = [...state.cards];
 
