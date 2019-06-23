@@ -46,12 +46,6 @@ const onMessage = (state, action) => {
     });
   }
 
-  if (data.card) {
-    modifiedState = updateObject(modifiedState, {
-      top_card_of_discard_pile: data.card
-    });
-  }
-
   if (data.cards_drawn) {
     let cards = [...state.cards];
 
@@ -110,6 +104,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GAME_BROKEN:
       return ws.onError(state, action);
     case actionTypes.GAME_SEND:
+      console.log(action);
       return ws.onSendMessage(state, action);
     case actionTypes.GAME_ERROR:
       return updateObject(state, { message: action.message });
