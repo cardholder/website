@@ -54,7 +54,7 @@ class Modal extends Component {
 
   onChangeUsername = event => {
     this.setState({ username: event.target.value, isTouched: true });
-    if (event.target.value.match("[a-zA-Z0-9_.]+")) {
+    if (event.target.value.match("[a-zA-Z0-9_.]+") && event.target.value.length > 1 && event.target.value.length < 10) {
       this.setState({ isValid: true });
     } else {
       this.setState({ isValid: false });
