@@ -14,7 +14,8 @@ const initialState = {
   cards: [],
   current_player: null,
   players: null,
-  top_card_of_discard_pile: null
+  top_card_of_discard_pile: null,
+  symbol: null
 };
 
 const updatePlayer = (state, player) => {
@@ -27,6 +28,8 @@ const updatePlayer = (state, player) => {
 const onMessage = (state, action) => {
   let data = JSON.parse(action.data);
   let modifiedState = state;
+
+  console.log(data);
 
   if (data.cards) {
     modifiedState = updateObject(modifiedState, {
@@ -76,6 +79,12 @@ const onMessage = (state, action) => {
     });
   }
 
+  if (data.symbol) {
+    modifiedState = updateObject(modifiedState, {
+      symbol: data.symbol
+    });
+  }
+
   return modifiedState;
 };
 
@@ -104,10 +113,11 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GAME_BROKEN:
       return ws.onError(state, action);
     case actionTypes.GAME_SEND:
-      console.log(action);
       return ws.onSendMessage(state, action);
     case actionTypes.GAME_ERROR:
       return updateObject(state, { message: action.message });
+    case actionTypes.GAME_SYMBOL:
+      return updateObject(state, { symbol: null });
     default:
       return state;
   }

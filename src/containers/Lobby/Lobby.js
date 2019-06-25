@@ -220,7 +220,7 @@ const mapDispatchToProps = dispatch => ({
   disconnect: () => dispatch(lobbyActions.lobbyDisconnect()),
   sendMessage: message => dispatch(lobbyActions.sendMessage(message)),
   setError: message => dispatch(lobbyListActions.setErrorMessage(message)),
-  setPlayerID: id => dispatch(generalActions.setPlayerID(id))
+  setPlayerID: id => dispatch(generalActions.setPlayerID(id)),
 });
 
 export default connect(

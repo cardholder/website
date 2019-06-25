@@ -29,3 +29,9 @@ export const setErrorMessage = (message) => {
         message: message
     }
 }
+
+export const resetSymbol = () => {
+    return {
+        type: actionTypes.GAME_SYMBOL,
+    }
+}

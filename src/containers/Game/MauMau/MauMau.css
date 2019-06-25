@@ -1,3 +1,39 @@
 .CurrentPlayer {
     color: #FF4040 !important;
 }
+
+.MauMau article {
+    height: 45px;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.MauMau .MiddleCards {
+    display: flex;
+    justify-content: center;
+}
+
+.MauMau .MiddleCards section {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.MauMau .MiddleCards article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding-left: 3px;
+}
+
+.MauMau .Black {
+    color: #1B1C1B;
+}
+
+.MauMau .Red {
+    color: #FF4040;
+}

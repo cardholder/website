@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Card from "./Card/Card";
@@ -18,7 +18,8 @@ class MauMau extends Component {
   state = {
     sent: false,
     myself: null,
-    myTurn: false
+    myTurn: false,
+    onWish: false
   };
 
   sendPlayerInformations = () => {
@@ -55,9 +56,14 @@ class MauMau extends Component {
       });
     }
 
-    if (this.props.message) {
+    if (this.props.message && this.props.message !== "Wuensch dir was") {
       NotificationManager.error(this.props.message, "", 3000);
-      this.props.setErrorMessage("");
+    }
+
+    if (this.props.message === "Wuensch dir was" && !this.state.onWish) {
+      this.setState({
+        onWish: true
+      })
     }
 
     if (
@@ -66,7 +72,7 @@ class MauMau extends Component {
       !this.state.myTurn &&
       this.props.current_player.id === this.state.myself.id
     ) {
-      NotificationManager.info("Du bist dran :-)", "", 3000);
+      NotificationManager.success("Du bist dran", "", 3000);
       this.setState({
         myTurn: true
       });
@@ -78,10 +84,17 @@ class MauMau extends Component {
       this.state.myTurn &&
       this.props.current_player.id !== this.state.myself.id
     ) {
+      NotificationManager.info(
+        this.props.current_player.name + " ist dran",
+        "",
+        2000
+      );
       this.setState({
         myTurn: false
       });
     }
+
+    this.props.setErrorMessage("");
   }
 
   componentWillUnmount() {
@@ -93,15 +106,28 @@ class MauMau extends Component {
       card: card,
       player: this.state.myself
     });
+
+    this.props.resetSymbol();
   };
 
   onDraw = () => {
     this.props.sendMessage({
       player: this.state.myself
     });
+
+    this.props.resetSymbol();
   };
 
-  getPrintedPlayers = players => {
+  onWish = (symbol) => {
+    console.log({symbol: symbol})
+    this.props.sendMessage({
+      symbol: symbol
+    });
+
+    this.setState({ onWish: false });
+  } 
+
+  getPrintedPlayers = (players, isBottom) => {
     let printedPlayers =
       players !== null
         ? players.map(player => {
@@ -125,6 +151,7 @@ class MauMau extends Component {
                     : "init"
                 }
               >
+                {isBottom ? <article /> : null}
                 <section
                   className={
                     this.props.current_player.id === player.id
@@ -132,13 +159,23 @@ class MauMau extends Component {
                       : null
                   }
                 >
-                  <section>
-                    {player !== null && player.role === "leader" ? (
-                      <img src={leaderImg} alt="leader" />
-                    ) : null}
-                    <p>{player.name}</p>
-                  </section>
+                  {!isBottom ? (
+                    <section>
+                      {player !== null && player.role === "leader" ? (
+                        <img src={leaderImg} alt="leader" />
+                      ) : null}
+                      <p>{player.name}</p>
+                    </section>
+                  ) : null}
                   <div>{cards}</div>
+                  {isBottom ? (
+                    <section>
+                      {player !== null && player.role === "leader" ? (
+                        <img src={leaderImg} alt="leader" />
+                      ) : null}
+                      <p>{player.name}</p>
+                    </section>
+                  ) : null}
                 </section>
               </Box>
             );
@@ -176,13 +213,10 @@ class MauMau extends Component {
         playersCopy !== null
           ? playersCopy.splice(1, Math.round(this.props.players.length / 2))
           : null;
-      let bottomPlayers =
-        playersCopy !== null
-          ? playersCopy.splice(Math.round((this.props.players.length - 1) / 2))
-          : null;
+      let bottomPlayers = playersCopy !== null ? playersCopy.splice(1) : null;
 
-      printedTopPlayers = this.getPrintedPlayers(topPlayers);
-      printedBottomPlayers = this.getPrintedPlayers(bottomPlayers);
+      printedTopPlayers = this.getPrintedPlayers(topPlayers, false);
+      printedBottomPlayers = this.getPrintedPlayers(bottomPlayers, true);
 
       const Box =
         this.state.myself &&
@@ -193,8 +227,32 @@ class MauMau extends Component {
             })
           : posed.div({});
 
+      const WBox = posed.div({
+        hoverable: true,
+        init: { y: 0 },
+        hover: { y: 5 }
+      });
+
       printedBottomPlayers.push(
         <Box key={this.props.player_id ? this.props.player_id : 99}>
+          <article>
+            {this.state.onWish ? (
+              <Fragment>
+                <WBox>
+                  <span className={classes.Red} onClick={() => this.onWish("h")}>&hearts;</span>
+                </WBox>
+                <WBox>
+                  <span className={classes.Black} onClick={() => this.onWish("s")}>&spades;</span>
+                </WBox>
+                <WBox>
+                  <span className={classes.Red} onClick={() => this.onWish("d")}>&diams;</span>
+                </WBox>
+                <WBox>
+                  <span className={classes.Black} onClick={() => this.onWish("c")}>&clubs;</span>
+                </WBox>
+              </Fragment>
+            ) : null}
+          </article>
           <section
             className={
               this.props.current_player.id === this.props.player_id
@@ -207,7 +265,7 @@ class MauMau extends Component {
               {this.state.myself && this.state.myself.role === "leader" ? (
                 <img src={leaderImg} alt="leader" />
               ) : null}
-              <p>{this.state.myself ? this.state.myself.name : null}</p>
+              <p>{this.props.username}</p>
             </section>
           </section>
         </Box>
@@ -216,11 +274,29 @@ class MauMau extends Component {
       printedBottomPlayers.reverse();
     }
 
+    let wishElement = null;
+    switch (this.props.symbol) {
+      case "h":
+        wishElement = <span className={classes.Red}>&hearts;</span>;
+        break;
+      case "c":
+        wishElement = <span className={classes.Black}>&clubs;</span>;
+        break;
+      case "s":
+        wishElement = <span className={classes.Black}>&spades;</span>;
+        break;
+      case "d":
+        wishElement = <span className={classes.Red}>&diams;</span>;
+        break;
+      default:
+        wishElement = null;
+    }
+
     return (
-      <section>
+      <section className={classes.MauMau}>
         <div>{printedTopPlayers}</div>
         <div>
-          <div>
+          <div className={classes.MiddleCards}>
             <section>
               <section>
                 <p>{this.props.remaining_cards}</p>
@@ -234,7 +310,6 @@ class MauMau extends Component {
                     (boxShadow < 0.5 ? boxShadow : 0.5) +
                     ")"
                 }}
-                isHoverable
               />
             </section>
             <section>
@@ -243,11 +318,14 @@ class MauMau extends Component {
                   key={this.props.top_card.id}
                   symbol={this.props.top_card.symbol}
                   value={this.props.top_card.value}
+                  isClickable={() => {}}
+                  onTurn={() => {}}
                 />
               ) : (
                 <Card hide />
               )}
             </section>
+            <article>{wishElement}</article>
           </div>
         </div>
         <div>{printedBottomPlayers}</div>
@@ -265,7 +343,9 @@ const mapStateToProps = state => ({
   players: state.game.players,
   isConnected: state.game.connected,
   player_id: state.general.player_id,
-  top_card: state.game.top_card_of_discard_pile
+  top_card: state.game.top_card_of_discard_pile,
+  username: state.general.username,
+  symbol: state.game.symbol
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -273,7 +353,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(gameActions.connect(config.SOCKET_API + "maumau/" + id + "/")),
   disconnect: () => dispatch(gameActions.disconnect()),
   sendMessage: message => dispatch(gameActions.sendMessage(message)),
-  setErrorMessage: message => dispatch(gameActions.setErrorMessage(message))
+  setErrorMessage: message => dispatch(gameActions.setErrorMessage(message)),
+  resetSymbol: () => dispatch(gameActions.resetSymbol())
 });
 
 export default connect(

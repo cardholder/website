@@ -46,3 +46,4 @@ export const GAME_SEND = GAME_PREFIX + "::" + SEND;
 export const GAME_DISCONNECT = GAME_PREFIX + "::" + DISCONNECT;
 export const GAME_CLOSE = GAME_PREFIX + "::" + CLOSED;
 export const GAME_ERROR = GAME_PREFIX + "::ERROR";
+export const GAME_SYMBOL = GAME_PREFIX + "::SYMBOL";
