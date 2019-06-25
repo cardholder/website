@@ -29,8 +29,6 @@ const onMessage = (state, action) => {
   let data = JSON.parse(action.data);
   let modifiedState = state;
 
-  console.log(data);
-
   if (data.cards) {
     modifiedState = updateObject(modifiedState, {
       cards: data.cards

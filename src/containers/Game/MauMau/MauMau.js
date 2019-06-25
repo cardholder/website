@@ -92,6 +92,8 @@ class MauMau extends Component {
       this.setState({
         myTurn: false
       });
+
+      this.props.resetSymbol();
     }
 
     this.props.setErrorMessage("");
@@ -119,7 +121,6 @@ class MauMau extends Component {
   };
 
   onWish = (symbol) => {
-    console.log({symbol: symbol})
     this.props.sendMessage({
       symbol: symbol
     });

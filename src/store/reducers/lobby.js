@@ -50,8 +50,6 @@ const onMessage = (state, action) => {
       isLeader = true;
     }
 
-    console.log(data.players);
-
     modifiedState = updateObject(modifiedState, {
       players: data.players,
       isLeader: isLeader
