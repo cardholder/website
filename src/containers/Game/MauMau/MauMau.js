@@ -46,6 +46,10 @@ class MauMau extends Component {
   }
 
   componentDidUpdate() {
+    if (this.props.message === "Sieger") {
+      this.props.history.push("/lobby");
+    }
+
     this.sendPlayerInformations();
     if (this.props.players && this.state.myself === null) {
       let me = this.props.players.find(player => {
