@@ -2,24 +2,29 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Card from "./Card/Card";
-import leaderImg from "../../../assets/crown.svg";
 import * as gameActions from "../../../store/actions/game";
 import * as config from "../../../config";
 import classes from "./MauMau.css";
 import "react-notifications/lib/notifications.css";
 import posed from "react-pose";
 
+import leaderImg from "../../../assets/crown.svg";
+
+import Player from "./Player/Player";
+
 import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
+import WinnerModal from "./WinnerModal/WinnerModal";
 
 class MauMau extends Component {
   state = {
     sent: false,
     myself: null,
     myTurn: false,
-    onWish: false
+    onWish: false,
+    wishElement: null
   };
 
   sendPlayerInformations = () => {
@@ -46,10 +51,6 @@ class MauMau extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.message === "Sieger") {
-      this.props.history.push("/lobby");
-    }
-
     this.sendPlayerInformations();
     if (this.props.players && this.state.myself === null) {
       let me = this.props.players.find(player => {
@@ -67,7 +68,7 @@ class MauMau extends Component {
     if (this.props.message === "Wuensch dir was" && !this.state.onWish) {
       this.setState({
         onWish: true
-      })
+      });
     }
 
     if (
@@ -97,7 +98,37 @@ class MauMau extends Component {
         myTurn: false
       });
 
-      this.props.resetSymbol();
+      if (
+        this.props.top_card !== null &&
+        (this.props.top_card.value !== "B" &&
+          this.props.top_card.value === this.props.symbol)
+      ) {
+        this.props.resetSymbol();
+      }
+    }
+
+    if (this.props.symbol && this.state.wishElement === null) {
+      if (this.props.symbol === "h") {
+        this.setState({
+          wishElement: <span className={classes.Red}>&hearts;</span>
+        });
+      } else if (this.props.symbol === "c") {
+        this.setState({
+          wishElement: <span className={classes.Black}>&clubs;</span>
+        });
+      } else if (this.props.symbol === "s") {
+        this.setState({
+          wishElement: <span className={classes.Black}>&spades;</span>
+        });
+      } else if (this.props.symbol === "d") {
+        this.setState({
+          wishElement: <span className={classes.Red}>&diams;</span>
+        });
+      }
+    } else if (this.props.symbol === null && this.state.wishElement !== null) {
+      this.setState({
+        wishElement: null
+      });
     }
 
     this.props.setErrorMessage("");
@@ -120,69 +151,31 @@ class MauMau extends Component {
     this.props.sendMessage({
       player: this.state.myself
     });
-
-    this.props.resetSymbol();
   };
 
-  onWish = (symbol) => {
+  onWish = symbol => {
     this.props.sendMessage({
       symbol: symbol
     });
 
     this.setState({ onWish: false });
-  } 
+  };
+
+  onReturn = () => {
+    this.props.history.push("/lobby");
+  };
 
   getPrintedPlayers = (players, isBottom) => {
     let printedPlayers =
       players !== null
         ? players.map(player => {
-            let cards = [];
-            for (let i = 0; i < player.card_amount; i++) {
-              cards.push(<Card key={i} hide />);
-            }
-
-            const Box = posed.div({
-              init: { y: 0 },
-              current: { y: 0 }
-            });
-
             return (
-              <Box
+              <Player
                 key={player.id}
-                pose={
-                  this.props.current_player &&
-                  player.id === this.props.current_player.id
-                    ? "current"
-                    : "init"
-                }
-              >
-                {isBottom ? <article /> : null}
-                <section
-                  className={
-                    this.props.current_player.id === player.id
-                      ? classes.CurrentPlayer
-                      : null
-                  }
-                >
-                  {!isBottom ? (
-                    <section>
-                      {player !== null && player.role === "leader" ? (
-                        <img src={leaderImg} alt="leader" />
-                      ) : null}
-                      <p>{player.name}</p>
-                    </section>
-                  ) : null}
-                  <div>{cards}</div>
-                  {isBottom ? (
-                    <section>
-                      {player !== null && player.role === "leader" ? (
-                        <img src={leaderImg} alt="leader" />
-                      ) : null}
-                      <p>{player.name}</p>
-                    </section>
-                  ) : null}
-                </section>
-              </Box>
+                player={player}
+                isBottom={isBottom}
+                current_player={this.props.current_player}
+              />
             );
           })
         : [];
@@ -244,16 +237,36 @@ class MauMau extends Component {
             {this.state.onWish ? (
               <Fragment>
                 <WBox>
-                  <span className={classes.Red} onClick={() => this.onWish("h")}>&hearts;</span>
+                  <span
+                    className={classes.Red}
+                    onClick={() => this.onWish("h")}
+                  >
+                    &hearts;
+                  </span>
                 </WBox>
                 <WBox>
-                  <span className={classes.Black} onClick={() => this.onWish("s")}>&spades;</span>
+                  <span
+                    className={classes.Black}
+                    onClick={() => this.onWish("s")}
+                  >
+                    &spades;
+                  </span>
                 </WBox>
                 <WBox>
-                  <span className={classes.Red} onClick={() => this.onWish("d")}>&diams;</span>
+                  <span
+                    className={classes.Red}
+                    onClick={() => this.onWish("d")}
+                  >
+                    &diams;
+                  </span>
                 </WBox>
                 <WBox>
-                  <span className={classes.Black} onClick={() => this.onWish("c")}>&clubs;</span>
+                  <span
+                    className={classes.Black}
+                    onClick={() => this.onWish("c")}
+                  >
+                    &clubs;
+                  </span>
                 </WBox>
               </Fragment>
             ) : null}
@@ -279,63 +292,52 @@ class MauMau extends Component {
       printedBottomPlayers.reverse();
     }
 
-    let wishElement = null;
-    switch (this.props.symbol) {
-      case "h":
-        wishElement = <span className={classes.Red}>&hearts;</span>;
-        break;
-      case "c":
-        wishElement = <span className={classes.Black}>&clubs;</span>;
-        break;
-      case "s":
-        wishElement = <span className={classes.Black}>&spades;</span>;
-        break;
-      case "d":
-        wishElement = <span className={classes.Red}>&diams;</span>;
-        break;
-      default:
-        wishElement = null;
-    }
-
     return (
-      <section className={classes.MauMau}>
-        <div>{printedTopPlayers}</div>
-        <div>
-          <div className={classes.MiddleCards}>
-            <section>
+      <Fragment>
+        <WinnerModal
+          show={this.props.message === "Sieger"}
+          isWinner={this.props.player_id === this.props.winner}
+          onReturn={this.onReturn}
+        />
+        <section className={classes.MauMau}>
+          <div>{printedTopPlayers}</div>
+          <div>
+            <div className={classes.MiddleCards}>
               <section>
-                <p>{this.props.remaining_cards}</p>
-              </section>
-              <Card
-                isClickable={this.onDraw}
-                hide
-                style={{
-                  boxShadow:
-                    "2px 2px 6px rgba(0, 0, 0, " +
-                    (boxShadow < 0.5 ? boxShadow : 0.5) +
-                    ")"
-                }}
-              />
-            </section>
-            <section>
-              {this.props.top_card ? (
+                <section>
+                  <p>{this.props.remaining_cards}</p>
+                </section>
                 <Card
-                  key={this.props.top_card.id}
-                  symbol={this.props.top_card.symbol}
-                  value={this.props.top_card.value}
-                  isClickable={() => {}}
-                  onTurn={() => {}}
+                  isClickable={this.onDraw}
+                  hide
+                  style={{
+                    boxShadow:
+                      "2px 2px 6px rgba(0, 0, 0, " +
+                      (boxShadow < 0.5 ? boxShadow : 0.5) +
+                      ")"
+                  }}
                 />
-              ) : (
-                <Card hide />
-              )}
-            </section>
-            <article>{wishElement}</article>
+              </section>
+              <section>
+                {this.props.top_card ? (
+                  <Card
+                    key={this.props.top_card.id}
+                    symbol={this.props.top_card.symbol}
+                    value={this.props.top_card.value}
+                    isClickable={() => {}}
+                    onTurn={() => {}}
+                  />
+                ) : (
+                  <Card hide />
+                )}
+              </section>
+              <article>{this.state.wishElement}</article>
+            </div>
           </div>
-        </div>
-        <div>{printedBottomPlayers}</div>
-        <NotificationContainer />
-      </section>
+          <div>{printedBottomPlayers}</div>
+          <NotificationContainer />
+        </section>
+      </Fragment>
     );
   }
 }
@@ -350,7 +352,8 @@ const mapStateToProps = state => ({
   player_id: state.general.player_id,
   top_card: state.game.top_card_of_discard_pile,
   username: state.general.username,
-  symbol: state.game.symbol
+  symbol: state.game.symbol,
+  winner: state.game.winner
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,14 +1,18 @@
-.CurrentPlayer {
-    color: #FF4040 !important;
-}
-
-.MauMau article {
+.MauMau div article {
     height: 45px;
     text-align: center;
     font-size: 30px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
+}
+
+.MauMau div article span {
+    cursor: pointer;
+}
+
+.MauMau div:nth-child(2) article span {
+    cursor: default;
+    margin-bottom: -10px
 }
 
 .MauMau .MiddleCards {
@@ -36,4 +40,8 @@
 
 .MauMau .Red {
     color: #FF4040;
+}
+
+.CurrentPlayer {
+    color: #FF4040 !important;
 }

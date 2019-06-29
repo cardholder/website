@@ -15,7 +15,8 @@ const initialState = {
   current_player: null,
   players: null,
   top_card_of_discard_pile: null,
-  symbol: null
+  symbol: null,
+  winner: null
 };
 
 const updatePlayer = (state, player) => {
@@ -83,6 +84,12 @@ const onMessage = (state, action) => {
     });
   }
 
+  if (data.id) {
+    modifiedState = updateObject(modifiedState, {
+      winner: data.id
+    });
+  }
+
   return modifiedState;
 };
 
@@ -91,10 +98,20 @@ export const onDisconnect = (state, action) => {
     state.websocket.close();
   }
   return updateObject(state, {
-    connected: false,
     data: null,
     id: null,
-    websocket: null
+    websocket: null,
+    connected: false,
+    error: false,
+    status: "",
+    message: "",
+    remaining_cards: 0,
+    cards: [],
+    current_player: null,
+    players: null,
+    top_card_of_discard_pile: null,
+    symbol: null,
+    winner: null
   });
 };
 
