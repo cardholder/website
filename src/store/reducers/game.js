@@ -19,6 +19,37 @@ const initialState = {
   winner: null
 };
 
+const sortCards = (a, b) => {
+  let cardValues = {
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    10: 10,
+    B: 11,
+    D: 12,
+    K: 13,
+    A: 14
+  };
+
+  let cardSymbols = {
+    h: 1,
+    s: 2,
+    d: 3,
+    c: 4
+  };
+
+  if (a.symbol !== b.symbol) {
+    return cardSymbols[a.symbol] - cardSymbols[b.symbol];
+  } else {
+    return cardValues[a.value] - cardValues[b.value];
+  }
+};
+
 const updatePlayer = (state, player) => {
   let playerIndex = state.players.findIndex(obj => obj.id === player.id);
   let players = [...state.players];
@@ -31,8 +62,10 @@ const onMessage = (state, action) => {
   let modifiedState = state;
 
   if (data.cards) {
+    let sortedCards = data.cards.sort(sortCards);
+
     modifiedState = updateObject(modifiedState, {
-      cards: data.cards
+      cards: sortedCards
     });
   }
 
@@ -50,9 +83,11 @@ const onMessage = (state, action) => {
 
   if (data.cards_drawn) {
     let cards = [...state.cards];
+    let tmp = cards.concat(data.cards_drawn);
+    let sortedCards = tmp.sort(sortCards);
 
     modifiedState = updateObject(modifiedState, {
-      cards: cards.concat(data.cards_drawn)
+      cards: sortedCards
     });
   }
 

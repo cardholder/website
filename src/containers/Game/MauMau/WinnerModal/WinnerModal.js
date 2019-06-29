@@ -13,7 +13,7 @@ const winnerModal = props =>
       <div className={classes.WinnerModal}>
         {props.isWinner ? (
           <div>
-            <img src={winnerImg} />
+            <img src={winnerImg} alt="winner" />
             <h2>Du hast gewonnen!</h2>
           </div>
         ) : (
