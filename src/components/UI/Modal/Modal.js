@@ -46,10 +46,17 @@ class Modal extends Component {
   };
 
   setUsername = () => {
-    if (this.state.remember) {
-      localStorage.setItem("username", this.state.username);
+    if (
+      this.state.username.match("^\\w{3,20}$") &&
+      this.state.username.length > 1 &&
+      this.state.username.length < 20
+    ) {
+      if (this.state.remember) {
+        localStorage.setItem("username", this.state.username);
+      }
+
+      this.props.setUsername(this.state.username);
     }
-    this.props.setUsername(this.state.username);
   };
 
   onChangeUsername = event => {
