@@ -292,11 +292,13 @@ class MauMau extends Component {
       printedBottomPlayers.reverse();
     }
 
+    let isAlone = (this.props.players !== null && this.props.players.length === 1);
+
     return (
       <Fragment>
         <WinnerModal
-          show={this.props.message === "Sieger"}
-          isWinner={this.props.player_id === this.props.winner}
+          show={this.props.message === "Sieger" || isAlone}
+          isWinner={this.props.player_id === this.props.winner || isAlone}
           onReturn={this.onReturn}
         />
         <section className={classes.MauMau}>
