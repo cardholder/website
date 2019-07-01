@@ -16,7 +16,7 @@ const initialState = {
   players: null,
   top_card_of_discard_pile: null,
   symbol: null,
-  winner: null
+  winner_id: -1
 };
 
 const sortCards = (a, b) => {
@@ -60,6 +60,12 @@ const updatePlayer = (state, player) => {
 const onMessage = (state, action) => {
   let data = JSON.parse(action.data);
   let modifiedState = state;
+
+  if (data.player_id !== null && data.player_id > -1) {
+    modifiedState = updateObject(modifiedState, {
+      winner_id: data.player_id
+    });
+  }
 
   if (data.cards) {
     let sortedCards = data.cards.sort(sortCards);
@@ -119,12 +125,6 @@ const onMessage = (state, action) => {
     });
   }
 
-  if (data.id) {
-    modifiedState = updateObject(modifiedState, {
-      winner: data.id
-    });
-  }
-
   return modifiedState;
 };
 
@@ -146,7 +146,7 @@ export const onDisconnect = (state, action) => {
     players: null,
     top_card_of_discard_pile: null,
     symbol: null,
-    winner: null
+    winner_id: -1
   });
 };
 

@@ -24,7 +24,10 @@ class MauMau extends Component {
     myself: null,
     myTurn: false,
     onWish: false,
-    wishElement: null
+    wishElement: null,
+    winnerModal: false,
+    isWinner: false,
+    top_card: null
   };
 
   sendPlayerInformations = () => {
@@ -50,7 +53,7 @@ class MauMau extends Component {
     this.props.connect(this.props.match.params.id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.sendPlayerInformations();
     if (this.props.players && this.state.myself === null) {
       let me = this.props.players.find(player => {
@@ -61,14 +64,12 @@ class MauMau extends Component {
       });
     }
 
-    if (this.props.message && this.props.message !== "Wuensch dir was") {
+    if (
+      this.props.message &&
+      this.props.message !== "Wuensch dir was" &&
+      this.props.message !== "Sieger"
+    ) {
       NotificationManager.error(this.props.message, "", 3000);
-    }
-
-    if (this.props.message === "Wuensch dir was" && !this.state.onWish) {
-      this.setState({
-        onWish: true
-      });
     }
 
     if (
@@ -97,14 +98,12 @@ class MauMau extends Component {
       this.setState({
         myTurn: false
       });
+    }
 
-      if (
-        this.props.top_card !== null &&
-        (this.props.top_card.value !== "B" &&
-          this.props.top_card.value === this.props.symbol)
-      ) {
-        this.props.resetSymbol();
-      }
+    if (this.props.message === "Wuensch dir was" && !this.state.onWish) {
+      this.setState({
+        onWish: true
+      });
     }
 
     if (this.props.symbol && this.state.wishElement === null) {
@@ -128,6 +127,35 @@ class MauMau extends Component {
     } else if (this.props.symbol === null && this.state.wishElement !== null) {
       this.setState({
         wishElement: null
+      });
+    }
+
+    if (this.state.top_card !== this.props.top_card) {
+      this.props.resetSymbol();
+      this.setState({
+        wishElement: null,
+        top_card: this.props.top_card
+      });
+    }
+
+    if (this.props.winner_id !== null && this.props.winner_id > -1 && !this.state.winnerModal) {
+      if (this.props.player_id === this.props.winner_id) {
+        this.setState({
+          isWinner: true,
+          winnerModal: true
+        });
+      } else {
+        this.setState({
+          isWinner: false,
+          winnerModal: true
+        });
+      }
+    }
+
+    if (this.props.players !== null && this.props.players.length === 1 && !this.state.winnerModal) {
+      this.setState({
+        isWinner: true,
+        winnerModal: true
       });
     }
 
@@ -292,13 +320,11 @@ class MauMau extends Component {
       printedBottomPlayers.reverse();
     }
 
-    let isAlone = (this.props.players !== null && this.props.players.length === 1);
-
     return (
       <Fragment>
         <WinnerModal
-          show={this.props.message === "Sieger" || isAlone}
-          isWinner={this.props.player_id === this.props.winner || isAlone}
+          show={this.state.winnerModal}
+          isWinner={this.state.isWinner}
           onReturn={this.onReturn}
         />
         <section className={classes.MauMau}>
@@ -355,7 +381,7 @@ const mapStateToProps = state => ({
   top_card: state.game.top_card_of_discard_pile,
   username: state.general.username,
   symbol: state.game.symbol,
-  winner: state.game.winner
+  winner_id: state.game.winner_id
 });
 
 const mapDispatchToProps = dispatch => ({
