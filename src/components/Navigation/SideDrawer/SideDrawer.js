@@ -20,7 +20,7 @@ const sideDrawer = props => {
       <div className={[classes.SideDrawer, attachedClasses].join(" ")}>
         <Title>
           <NavigationItem to="/" exact>
-            <img src={Logo} />
+            <img src={Logo} alt="logo" />
           </NavigationItem>
           <NavigationItem to="/" exact>
             cardholder
