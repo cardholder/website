@@ -23,7 +23,7 @@ describe("<SideDrawer />", () => {
   });
 
   it("should render a <Title /> with <NavigationItem />", () => {
-    expect(wrapper.find(NavigationItem)).toHaveLength(1);
+    expect(wrapper.find(NavigationItem)).toHaveLength(2);
   });
 
   it("should render <NavigationItems />", () => {
