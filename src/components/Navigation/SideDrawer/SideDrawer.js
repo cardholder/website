@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 
+import Logo from "../../../assets/logo.png";
 import Title from "../../Title/Title";
 import NavigationItem from "../NavigationItems/NavigationItem/NavigationItem";
 import NavigationItems from "../NavigationItems/NavigationItems";
@@ -18,6 +19,9 @@ const sideDrawer = props => {
     <Fragment>
       <div className={[classes.SideDrawer, attachedClasses].join(" ")}>
         <Title>
+          <NavigationItem to="/" exact>
+            <img src={Logo} />
+          </NavigationItem>
           <NavigationItem to="/" exact>
             cardholder
           </NavigationItem>
