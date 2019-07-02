@@ -1,1 +1,1 @@
-export const SOCKET_API = "ws://ec2-18-185-18-129.eu-central-1.compute.amazonaws.com:8000/";
+export const SOCKET_API = "ws://ec2-18-185-18-129.eu-central-1.compute.amazonaws.com:80/";
